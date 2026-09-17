@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book a Demo — Intendra AI</title>
+  <meta name="description" content="Join CX leaders who are transforming customer interactions into strategic advantage. Request a personalised demo today." />
+  <link rel="icon" href="assets/logos/favicon/favicon-32x32.png" />
+  <link rel="stylesheet" href="css/variables.css?v=37" />
+  <link rel="stylesheet" href="css/base.css?v=37" />
+  <link rel="stylesheet" href="css/layout.css?v=59" />
+  <link rel="stylesheet" href="css/components.css?v=37" />
+  <link rel="stylesheet" href="css/animations.css?v=37" />
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="assets/logos/wordmark/intendra-wordmark-green.png" alt="Intendra AI" width="150" height="32" />
+      </a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="platform.html">Platform</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="nav__has-sub">
+            <a href="resources.html">Resources</a>
+            <ul class="nav__sub">
+              <li><a href="news.html">News</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html" class="btn btn--primary nav__cta--mobile">Book a Demo →</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn--primary nav__cta--header" aria-current="page">Book a Demo →</a>
+        <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Demo request — full-bleed split: pitch left (textured), form right (white) -->
+    <section class="demo">
+
+      <!-- Left: the pitch -->
+      <div class="demo__intro reveal">
+        <div class="demo__intro-inner">
+          <h1>See <span class="text-gradient">Intendra AI</span> in action with your own data.</h1>
+          <p class="demo__lede">Tell us how your team handles customer interactions and agent performance today. We'll show you exactly what Intendra surfaces, and what to do about it.</p>
+
+          <ul class="demo-points">
+            <li class="demo-point">
+              <span class="demo-point__icon">
+                <img src="assets/icons/Product_Pulse.png" alt="" />
+              </span>
+              <div>
+                <h3>Understand every contact and its root cause</h3>
+                <p>Tag 100% of interactions with intent, emotion, effort, and resolution, then distill the patterns to find what's broken, missing, or misaligned.</p>
+              </div>
+            </li>
+            <li class="demo-point">
+              <span class="demo-point__icon">
+                <img src="assets/icons/Product_Compass.png" alt="" />
+              </span>
+              <div>
+                <h3>Know what to fix (and why)</h3>
+                <p>Apply value-irritant logic to determine what to eliminate, automate, streamline, or enhance, based on impact, effort, and cost.</p>
+              </div>
+            </li>
+            <li class="demo-point">
+              <span class="demo-point__icon">
+                <img src="assets/icons/Product_Profile.png" alt="" />
+              </span>
+              <div>
+                <h3>Manage performance and find the best fit</h3>
+                <p>Score agents, teams, and managers to surface gaps, coaching opportunities, and the drivers of performance, then match channels to intents, intents to associates, and customers to the right team.</p>
+              </div>
+            </li>
+            <li class="demo-point">
+              <span class="demo-point__icon">
+                <img src="assets/icons/Product_Reveal.png" alt="" />
+              </span>
+              <div>
+                <h3>Act before the customer churns</h3>
+                <p>Uncover silent friction. Intervene proactively. Prevent the next contact before it happens.</p>
+              </div>
+            </li>
+          </ul>
+
+          <blockquote class="demo-quote">
+            <p>"The best customer service is when customers don't need to contact you at all. Intendra exists to make that possible, systematically, at scale."</p>
+            <cite>Bill Price, CEO &amp; Co-founder</cite>
+          </blockquote>
+        </div>
+      </div>
+
+      <!-- Right: the form on a flat white panel -->
+      <div class="demo__panel">
+        <form class="demo-form reveal" action="#" method="post">
+          <!-- NOTE for engineering: static markup only, wire up real submit endpoint -->
+          <div class="form-row">
+            <div class="field">
+              <label for="first-name">First Name <span class="req">*</span></label>
+              <input type="text" id="first-name" name="first-name" required />
+            </div>
+            <div class="field">
+              <label for="last-name">Last Name <span class="req">*</span></label>
+              <input type="text" id="last-name" name="last-name" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="field">
+              <label for="email">Work Email <span class="req">*</span></label>
+              <input type="email" id="email" name="email" required />
+            </div>
+            <div class="field">
+              <label for="job-title">Job Title <span class="req">*</span></label>
+              <input type="text" id="job-title" name="job-title" required />
+            </div>
+          </div>
+          <div class="field">
+            <label for="company">Company Name <span class="req">*</span></label>
+            <input type="text" id="company" name="company" required />
+          </div>
+          <div class="field">
+            <label for="volume">What's your typical monthly volume of customer interactions? <span class="req">*</span></label>
+            <p class="field__hint">Across tickets, support cases, calls, surveys, reviews, app stores, etc.</p>
+            <select id="volume" name="volume" required>
+              <option value="" selected disabled>Select a range</option>
+              <option value="lt-10k">Under 10,000</option>
+              <option value="10k-50k">10,000 to 50,000</option>
+              <option value="50k-250k">50,000 to 250,000</option>
+              <option value="250k-1m">250,000 to 1 million</option>
+              <option value="gt-1m">Over 1 million</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="message">How can we help? <span class="req">*</span></label>
+            <textarea id="message" name="message" rows="4" placeholder="Describe your reason for interest, use-case or problem, and the tools you're using or considering." required></textarea>
+          </div>
+          <div class="demo-form__actions">
+            <button type="submit" class="btn btn--primary demo-form__submit">Try the system →</button>
+          </div>
+        </form>
+      </div>
+
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid footer-grid--4col">
+      <div>
+        <img src="assets/logos/wordmark/intendra-wordmark-green.png" alt="Intendra AI" width="150" height="32" />
+        <p>Eliminating friction. Activating insight.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="products.html">Pulse</a></li>
+          <li><a href="products.html">Compass</a></li>
+          <li><a href="products.html">Profile</a></li>
+          <li><a href="products.html">FIT</a></li>
+          <li><a href="products.html">Reveal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="solutions.html#services">Services</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="news.html">News</a></li>
+          <li><a href="resources.html#articles">Articles</a></li>
+          <li><a href="resources.html#podcasts">Podcasts</a></li>
+          <li><a href="resources.html#case-studies">Case Studies</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Intendra AI</p>
+      <div class="footer-bottom__social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+  <script src="js/animations.js"></script>
+</body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "fabrica-de-assets",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["--prefix", "/Users/mariaandrea/Desktop/Fabrica de assets", "run", "dev"],
+      "port": 4173
+    },
+    {
+      "name": "intendra-website",
+      "runtimeExecutable": "python3",
+      "runtimeArgs": ["/Users/mariaandrea/Desktop/intendra website/scripts/dev-server.py", "/Users/mariaandrea/Desktop/intendra website"],
+      "port": 8743,
+      "autoPort": true
+    }
+  ]
+}

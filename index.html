@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intendra AI — The Customer Behavior Intelligence Platform</title>
+  <meta name="description" content="Intendra analyzes 100% of your customer behavior at >97% accuracy, detects the silent customers who churn without complaining, and prescribes the best action — what to do, and how." />
+  <link rel="icon" href="assets/logos/favicon/favicon-32x32.png" />
+  <link rel="stylesheet" href="css/variables.css?v=37" />
+  <link rel="stylesheet" href="css/base.css?v=37" />
+  <link rel="stylesheet" href="css/layout.css?v=75" />
+  <link rel="stylesheet" href="css/components.css?v=38" />
+  <link rel="stylesheet" href="css/animations.css?v=37" />
+</head>
+<body class="home">
+
+  <header class="site-header">
+    <div class="container">
+      <a href="index.html" class="logo">
+        <img src="assets/logos/wordmark/intendra-wordmark-green.png" alt="Intendra AI" width="150" height="32" />
+      </a>
+      <nav class="nav">
+        <ul class="nav__list">
+          <li><a href="platform.html">Platform</a></li>
+          <li><a href="products.html">Products</a></li>
+          <li><a href="solutions.html">Solutions</a></li>
+          <li><a href="about.html">About</a></li>
+          <li class="nav__has-sub">
+            <a href="resources.html">Resources</a>
+            <ul class="nav__sub">
+              <li><a href="news.html">News</a></li>
+            </ul>
+          </li>
+          <li><a href="contact.html" class="btn btn--primary nav__cta--mobile">Book a Demo →</a></li>
+        </ul>
+        <a href="contact.html" class="btn btn--primary nav__cta--header">Book a Demo →</a>
+        <button class="nav__toggle" aria-label="Toggle menu" aria-expanded="false">
+          <span></span><span></span><span></span>
+        </button>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- Hero — full-screen: copy left, live-product mockup right -->
+    <section class="hero">
+      <div class="container">
+        <div class="hero__copy">
+          <p class="eyebrow reveal">The Customer Behavior Intelligence Platform</p>
+          <h1 class="reveal">Every word. Every move.<br><span class="text-gradient">Every silence.</span><br>Turned into action.</h1>
+          <p class="reveal">Dashboards tell you what happened. Intendra tells you what to do about it, across every customer and agent interaction.</p>
+          <div class="hero-actions reveal">
+            <a href="contact.html" class="btn btn--primary">Try the system →</a>
+            <a href="#platform" class="btn btn--outline">Explore Intendra AI</a>
+          </div>
+        </div>
+
+        <!-- Product visual: a faithful mini product, modelled on demo.intendra.ai.
+             Three views cross-fade on a timer (see js/main.js initAppCycle).
+             Static illustrative figures, labelled below. -->
+        <div class="hero__visual reveal" aria-hidden="true">
+          <div class="app-mock" data-app-cycle>
+            <div class="app-mock__bar">
+              <span class="app-mock__dot"></span>
+              <span class="app-mock__dot"></span>
+              <span class="app-mock__dot"></span>
+              <span class="app-mock__url">intendra.ai</span>
+            </div>
+
+            <div class="app-mock__stage">
+
+              <!-- View · Ask Intendra -->
+              <div class="app-view is-active" data-view="ask">
+                <div class="app-mock__head">
+                  <div>
+                    <span class="app-mock__eyebrow">Ask Intendra</span>
+                    <h3 class="app-mock__title">Ask anything about your operation</h3>
+                  </div>
+                  <span class="app-mock__range"><i class="ask-mock__dot"></i>live</span>
+                </div>
+
+                <div class="ask-mock">
+                  <div class="ask-feed">
+                    <div class="ask-feed__spacer"></div>
+
+                    <!-- Turn 1 · the week -->
+                    <div class="ask-msg ask-msg--user ask-reveal">
+                      <div class="ask-mock__q" data-q="1" data-text="How the week went?"></div>
+                    </div>
+                    <div class="ask-typing ask-reveal" data-typing="1">
+                      <span class="ask-avatar">i</span>
+                      <div class="ask-dots"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="ask-msg ask-msg--bot ask-reveal" data-answer="1">
+                      <div class="ask-msg__body">
+                        <div class="ask-bubble">
+                          <p class="ask-summary">A steady week — contacts up 3% to 8,470, effort easing, quality at 87. Most avoidable cost traces to one missed carrier SLA ($305K/yr).</p>
+                        </div>
+                        <div class="app-mock__grid ask-reveal--cards">
+                          <div class="mmetric">
+                            <span class="mmetric__label">Contacts analysed</span>
+                            <div class="mmetric__row"><span class="mmetric__val">8,470</span><span class="mmetric__delta mmetric__delta--up">+3%</span></div>
+                            <svg class="mspark" viewBox="0 0 120 32" preserveAspectRatio="none" fill="none"><polyline points="0,26 20,24 40,25 60,18 80,19 100,12 120,8" stroke="#C7CACF" stroke-width="2" /><circle cx="120" cy="8" r="3" fill="#1BEA87" /></svg>
+                          </div>
+                          <div class="mmetric">
+                            <span class="mmetric__label">Total cost to serve</span>
+                            <div class="mmetric__row"><span class="mmetric__val">$66.9K</span><span class="mmetric__delta mmetric__delta--down">+3%</span></div>
+                            <svg class="mspark" viewBox="0 0 120 32" preserveAspectRatio="none" fill="none"><polyline points="0,24 20,22 40,23 60,20 80,18 100,14 120,10" stroke="#C7CACF" stroke-width="2" /><circle cx="120" cy="10" r="3" fill="#E5484D" /></svg>
+                          </div>
+                          <div class="mmetric">
+                            <span class="mmetric__label">Customer effort · CES</span>
+                            <div class="mmetric__row"><span class="mmetric__val">3.9</span><span class="mmetric__delta mmetric__delta--up">+0.1</span></div>
+                            <div class="mbar"><span class="mbar__fill" style="width:78%"></span></div>
+                          </div>
+                          <div class="mmetric">
+                            <span class="mmetric__label">Quality score</span>
+                            <div class="mmetric__row"><span class="mmetric__val">87</span><span class="mmetric__delta mmetric__delta--up">+1</span></div>
+                            <svg class="mspark" viewBox="0 0 120 32" preserveAspectRatio="none" fill="none"><polyline points="0,20 20,18 40,19 60,16 80,14 100,13 120,11" stroke="#C7CACF" stroke-width="2" /><circle cx="120" cy="11" r="3" fill="#1BEA87" /></svg>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Turn 2 · why they contact us -->
+                    <div class="ask-msg ask-msg--user ask-reveal">
+                      <div class="ask-mock__q" data-q="2" data-text="Why do customers contact us — and what does it cost?"></div>
+                    </div>
+                    <div class="ask-typing ask-reveal" data-typing="2">
+                      <span class="ask-avatar">i</span>
+                      <div class="ask-dots"><span></span><span></span><span></span></div>
+                    </div>
+                    <div class="ask-msg ask-msg--bot ask-reveal" data-answer="2">
+                      <div class="ask-msg__body">
+                        <div class="ask-pulse-head">
+                          <div class="demand-toggle">
+                            <button class="demand-toggle__btn" type="button" data-metric="volume" tabindex="-1">Volume</button>
+                            <button class="demand-toggle__btn is-active" type="button" data-metric="cost" tabindex="-1">Cost</button>
+                          </div>
+                        </div>
+
+                        <div class="demand-view demand-view--cost is-active" data-metric="cost">
+                          <div class="demand-chart">
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:34px"></span><span class="dbar__seg dbar__seg--handle" style="height:62px"></span><span class="dbar__val">$12.9K</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:33px"></span><span class="dbar__seg dbar__seg--handle" style="height:50px"></span><span class="dbar__val">$11.1K</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:13px"></span><span class="dbar__seg dbar__seg--handle" style="height:40px"></span><span class="dbar__val">$7.1K</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:9px"></span><span class="dbar__seg dbar__seg--handle" style="height:18px"></span><span class="dbar__val">$3.4K</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:8px"></span><span class="dbar__seg dbar__seg--handle" style="height:17px"></span><span class="dbar__val">$3.3K</span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:11px"></span><span class="dbar__seg dbar__seg--handle" style="height:18px"></span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:7px"></span><span class="dbar__seg dbar__seg--handle" style="height:14px"></span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:5px"></span><span class="dbar__seg dbar__seg--handle" style="height:9px"></span></div>
+                          </div>
+                          <div class="demand-legend">
+                            <span><i class="dot dot--handle"></i>handling</span>
+                            <span><i class="dot dot--down"></i>downstream</span>
+                            <span class="demand-legend__note">top 5 = 57% of cost</span>
+                          </div>
+                        </div>
+
+                        <div class="demand-view demand-view--volume" data-metric="volume">
+                          <div class="demand-chart">
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:96px"></span><span class="dbar__val">2,034</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:56px"></span><span class="dbar__val">1,180</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:32px"></span><span class="dbar__val">680</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:31px"></span><span class="dbar__val">651</span></div>
+                            <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:19px"></span><span class="dbar__val">398</span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:9px"></span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:6px"></span></div>
+                            <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:6px"></span></div>
+                          </div>
+                          <div class="demand-legend">
+                            <span><i class="dot dot--vol"></i>contacts analysed</span>
+                            <span class="demand-legend__note">top 5 = 58% of 8,470</span>
+                          </div>
+                        </div>
+
+                        <div class="app-mock__act">
+                          <span class="mmetric__label">Every intent · ranked by value</span>
+                          <div class="drank-list">
+                            <div class="drank">
+                              <div class="drank__name"><strong>Get a delivery update</strong><span class="act-sub">2,034 contacts · 58% resolved</span></div>
+                              <div class="act-right"><span class="act-tag act-tag--digitize">Digitize</span><span class="act-val">$340K / yr</span></div>
+                            </div>
+                            <div class="drank">
+                              <div class="drank__name"><strong>Cancel my order</strong><span class="act-sub">680 contacts · 71% resolved</span></div>
+                              <div class="act-right"><span class="act-tag act-tag--leverage">Leverage</span><span class="act-val">$115K / yr</span></div>
+                            </div>
+                            <div class="drank">
+                              <div class="drank__name"><strong>Get a refund</strong><span class="act-sub">1,180 contacts · 60% resolved</span></div>
+                              <div class="act-right"><span class="act-tag act-tag--eliminate">Eliminate</span><span class="act-val">$92K / yr</span></div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Moment 3 · how we served -->
+                      <div class="ask-msg ask-msg--user ask-reveal">
+                        <div class="ask-mock__q" data-q="3" data-text="And how well did we serve them?"></div>
+                      </div>
+                      <div class="ask-typing ask-reveal" data-typing="3">
+                        <span class="ask-avatar">i</span>
+                        <div class="ask-dots"><span></span><span></span><span></span></div>
+                      </div>
+                      <div class="ask-msg ask-msg--bot ask-reveal" data-answer="3">
+                        <div class="ask-msg__body">
+                          <div class="ask-bubble">
+                            <p class="ask-summary">Quality held at 87 — above the 85 target — with 91% human agreement. Only 7 fatal violations all week.</p>
+                          </div>
+                          <div class="app-mock__grid ask-reveal--cards">
+                            <div class="mmetric">
+                              <span class="mmetric__label">Quality score</span>
+                              <div class="mmetric__row"><span class="mmetric__val">87</span><span class="mmetric__delta mmetric__delta--up">+1</span></div>
+                              <span class="mmetric__note">target 85</span>
+                            </div>
+                            <div class="mmetric">
+                              <span class="mmetric__label">Defect-free contacts</span>
+                              <div class="mmetric__row"><span class="mmetric__val">68%</span><span class="mmetric__delta mmetric__delta--up">+2pp</span></div>
+                              <span class="mmetric__note">target 75</span>
+                            </div>
+                            <div class="mmetric">
+                              <span class="mmetric__label">Fatal violations</span>
+                              <div class="mmetric__row"><span class="mmetric__val">7</span><span class="mmetric__delta mmetric__delta--down">this week</span></div>
+                              <span class="mmetric__note">auto-zero the audit</span>
+                            </div>
+                            <div class="mmetric">
+                              <span class="mmetric__label">Human agreement</span>
+                              <div class="mmetric__row"><span class="mmetric__val">91%</span><span class="mmetric__delta mmetric__delta--up">+3pp</span></div>
+                              <span class="mmetric__note">AI vs ratified sample</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                    <!-- Moment 4 · what to act on -->
+                      <div class="ask-msg ask-msg--user ask-reveal">
+                        <div class="ask-mock__q" data-q="4" data-text="So what should we act on first?"></div>
+                      </div>
+                      <div class="ask-typing ask-reveal" data-typing="4">
+                        <span class="ask-avatar">i</span>
+                        <div class="ask-dots"><span></span><span></span><span></span></div>
+                      </div>
+                      <div class="ask-msg ask-msg--bot ask-reveal" data-answer="4">
+                        <div class="ask-msg__body">
+                          <div class="ask-bubble">
+                            <p class="ask-summary">Every intent placed by value to the company × to the customer — $648K/yr at stake. Digitize and eliminate carry the most.</p>
+                          </div>
+                          <div class="quad-grid ask-reveal--cards">
+                            <div class="quad quad--simplify"><span class="quad__tag">Simplify</span><span class="quad__val">$103K</span><span class="quad__sub">11% vol · 23% cost</span></div>
+                            <div class="quad quad--leverage"><span class="quad__tag">Leverage</span><span class="quad__val">$178K</span><span class="quad__sub">20% vol · 16% cost</span></div>
+                            <div class="quad quad--eliminate"><span class="quad__tag">Eliminate</span><span class="quad__val">$114K</span><span class="quad__sub">13% vol · 19% cost</span></div>
+                            <div class="quad quad--digitize"><span class="quad__tag">Digitize</span><span class="quad__val">$559K</span><span class="quad__sub">55% vol · 43% cost</span></div>
+                          </div>
+                        </div>
+                      </div>
+
+                  </div>
+
+                  <div class="ask-mock__bar">
+                    <span class="ask-mock__input" data-placeholder="Ask about intents, cost, effort, emotion…"></span>
+                    <span class="ask-mock__send">↑</span>
+                  </div>
+                </div>
+              </div>
+
+            </div>
+          </div>
+          <p class="hero__visual-note">Illustrative product views — not live customer data.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Proof points — stat boxes over a green band -->
+    <section class="hero-proof hero-proof--band">
+      <div class="container">
+        <div class="stat-grid stat-grid--band reveal-stagger">
+          <div class="stat-card reveal">
+            <div class="stat-value" data-target="97" data-prefix="&gt;" data-suffix="%">&gt;97%</div>
+            <div class="stat-label">Intent classification accuracy — the rest is flagged, never guessed.</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-value" data-target="100" data-suffix="%">100%</div>
+            <div class="stat-label">Of every interaction scored — not a 2% QA sample.</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-value" data-target="92" data-suffix="%">92%</div>
+            <div class="stat-label">Of unhappy customers never complain. Reveal hears them anyway.</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-value">2&times;</div>
+            <div class="stat-label">How far your worst contact type runs above industry median.</div>
+          </div>
+          <div class="stat-card reveal">
+            <div class="stat-value">Days</div>
+            <div class="stat-label">From raw data to a costed, owned action. Not the quarterly deep-dive.</div>
+          </div>
+        </div>
+        <p class="proof-band__note reveal">
+          The methodology behind
+          <a href="about.html#books"><em>The Best Service Is No Service</em></a>
+          and
+          <a href="about.html#books"><em>The Frictionless Organization</em></a>
+          — trusted across 155+ enterprise CX engagements
+        </p>
+      </div>
+    </section>
+
+    <!-- Problem -->
+    <section class="section--light problem-beat">
+      <div class="container problem-beat__inner">
+        <span class="problem-beat__eyebrow reveal">The problem</span>
+        <h2 class="reveal">You don't need more reports. You need a system that tells you <span class="problem-beat__hl">what to do, who owns it, and what it's worth.</span></h2>
+        <p class="reveal">Most CX programs give you volume reports, sample QA audits, adherence scores, and post-contact surveys. None of them answer the only questions that matter: what should we do, who owns it, and what is it worth? So friction compounds, decisions stall, and customers leave before you ever find out why.</p>
+        <p class="problem-beat__kicker reveal">Too much data. Too little relevance.</p>
+      </div>
+    </section>
+
+    <!-- Front to back — the bridge -->
+    <section class="section--canvas frontback">
+      <div class="container">
+        <div class="frontback__intro reveal">
+          <span class="frontback__eyebrow">Captured in the front, owned in the back</span>
+          <h2 class="frontback__title">The problem surfaces in one place. The fix lives in another.</h2>
+          <p class="frontback__lede">Most of what customers contact you about — and much of what they never say — starts somewhere else: a refund policy, a checkout step, a missed SLA. The teams closest to the customer absorb the cost; the fix belongs to product, logistics, or billing. Intendra reads it all, spoken and silent, and assigns each intent to its owner, with its cost and cause.</p>
+        </div>
+
+        <div class="route reveal">
+          <svg class="route__svg" viewBox="0 0 1000 500" role="img" aria-label="Customer signals flow through Intendra and are assigned to the owner who can fix each one.">
+            <!-- left → hub connectors -->
+            <path class="route__link" d="M278 60 C 390 60, 452 250, 489 250" />
+            <path class="route__link" d="M278 155 C 390 155, 452 250, 489 250" />
+            <path class="route__link" d="M278 250 C 400 250, 452 250, 489 250" />
+            <path class="route__link" d="M278 345 C 390 345, 452 250, 489 250" />
+            <path class="route__link route__link--silent" d="M278 440 C 390 440, 452 250, 489 250" />
+            <!-- hub → right connectors -->
+            <path class="route__link" d="M511 250 C 560 250, 620 60, 722 60" />
+            <path class="route__link" d="M511 250 C 560 250, 620 155, 722 155" />
+            <path class="route__link" d="M511 250 C 570 250, 620 250, 722 250" />
+            <path class="route__link" d="M511 250 C 560 250, 620 345, 722 345" />
+            <path class="route__link" d="M511 250 C 560 250, 620 440, 722 440" />
+
+            <!-- hub -->
+            <circle class="route__glow" cx="500" cy="250" r="34" />
+            <text class="route__hublabel" x="500" y="205" text-anchor="middle">INTENDRA</text>
+            <circle class="route__hub" cx="500" cy="250" r="13" />
+            <text class="route__hubsub" x="500" y="308" text-anchor="middle">reads · costs · assigns</text>
+
+            <!-- left nodes: signals -->
+            <g>
+              <text class="route__sig" x="256" y="55" text-anchor="end">"Where's my refund?"</text>
+              <text class="route__cause" x="256" y="74" text-anchor="end">Delayed-refund policy</text>
+              <circle class="route__node" cx="278" cy="60" r="5" />
+            </g>
+            <g>
+              <text class="route__sig" x="256" y="150" text-anchor="end">"Checkout won't submit"</text>
+              <text class="route__cause" x="256" y="169" text-anchor="end">Broken checkout step</text>
+              <circle class="route__node" cx="278" cy="155" r="5" />
+            </g>
+            <g>
+              <text class="route__sig" x="256" y="245" text-anchor="end">"My order is late"</text>
+              <text class="route__cause" x="256" y="264" text-anchor="end">Missed carrier SLA</text>
+              <circle class="route__node" cx="278" cy="250" r="5" />
+            </g>
+            <g>
+              <text class="route__sig" x="256" y="340" text-anchor="end">"Cancel my plan"</text>
+              <text class="route__cause" x="256" y="359" text-anchor="end">Unclear cancellation terms</text>
+              <circle class="route__node" cx="278" cy="345" r="5" />
+            </g>
+            <g>
+              <text class="route__sig route__sig--silent" x="256" y="435" text-anchor="end">…never said a word</text>
+              <text class="route__cause" x="256" y="454" text-anchor="end">The 92% Reveal surfaces</text>
+              <circle class="route__node route__node--silent" cx="278" cy="440" r="5" />
+            </g>
+
+            <!-- right nodes: owners + value -->
+            <g>
+              <circle class="route__node" cx="722" cy="60" r="5" />
+              <text class="route__owner" x="744" y="55" text-anchor="start">Billing</text>
+              <text class="route__val" x="744" y="74" text-anchor="start">$553K/yr</text>
+            </g>
+            <g>
+              <circle class="route__node" cx="722" cy="155" r="5" />
+              <text class="route__owner" x="744" y="150" text-anchor="start">Product</text>
+              <text class="route__val" x="744" y="169" text-anchor="start">$340K/yr</text>
+            </g>
+            <g>
+              <circle class="route__node" cx="722" cy="250" r="5" />
+              <text class="route__owner" x="744" y="245" text-anchor="start">Logistics</text>
+              <text class="route__val" x="744" y="264" text-anchor="start">$305K/yr</text>
+            </g>
+            <g>
+              <circle class="route__node" cx="722" cy="345" r="5" />
+              <text class="route__owner" x="744" y="340" text-anchor="start">Policy</text>
+              <text class="route__val" x="744" y="359" text-anchor="start">$180K/yr</text>
+            </g>
+            <g>
+              <circle class="route__node" cx="722" cy="440" r="5" />
+              <text class="route__owner" x="744" y="435" text-anchor="start">CX &amp; Retention</text>
+              <text class="route__val" x="744" y="454" text-anchor="start">at-risk revenue</text>
+            </g>
+
+            <!-- column captions -->
+            <text class="route__cap" x="256" y="18" text-anchor="end">WHAT SURFACES</text>
+            <text class="route__cap" x="744" y="18" text-anchor="start">WHO OWNS THE FIX</text>
+          </svg>
+        </div>
+        <p class="frontback__note reveal">Illustrative signals and values. Actual figures come from your own data.</p>
+      </div>
+    </section>
+
+    <!-- Without / With comparison -->
+    <section class="comparison">
+      <div class="container">
+        <h2 class="reveal" style="text-align:center;">What changes with Intendra.</h2>
+
+        <div class="comparison-table reveal" data-comparison>
+          <div class="comparison-legend" aria-hidden="true">
+            <span class="comparison-legend__today">What you get today</span>
+            <span class="comparison-legend__with">What changes with Intendra</span>
+          </div>
+
+          <div class="comparison-row" style="--i:0">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">Volume and handle-time reports</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">Intent analysis across 100% of interactions</span>
+            </div>
+          </div>
+
+          <div class="comparison-row" style="--i:1">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">Post-contact CSAT surveys</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">Root cause identification and friction mapping</span>
+            </div>
+          </div>
+
+          <div class="comparison-row" style="--i:2">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">Sample QA audits (2–10%)</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">100% QA coverage, every interaction</span>
+            </div>
+          </div>
+
+          <div class="comparison-row" style="--i:3">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">Agent adherence scores</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">Balanced agent scorecard tied to outcomes</span>
+            </div>
+          </div>
+
+          <div class="comparison-row" style="--i:4">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">SLA dashboards</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">Prioritized actions ranked by business impact</span>
+            </div>
+          </div>
+
+          <div class="comparison-row" style="--i:5">
+            <div class="comparison-cell comparison-cell--without">
+              <span class="comparison-cell__tag">Today</span>
+              <span class="comparison-cell__mark comparison-cell__mark--x" aria-hidden="true">✕</span>
+              <span class="comparison-cell__text">Population averages</span>
+            </div>
+            <div class="comparison-arrow" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h13M13 6l6 6-6 6"/></svg>
+            </div>
+            <div class="comparison-cell comparison-cell--with">
+              <span class="comparison-cell__tag comparison-cell__tag--with">With</span>
+              <span class="comparison-cell__mark comparison-cell__mark--check" aria-hidden="true">✓</span>
+              <span class="comparison-cell__text">Individual-level precision</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- How Intendra works — platform architecture -->
+    <section class="section--canvas arch">
+      <div class="container">
+        <div class="arch__head reveal">
+          <span class="arch__head-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+          </span>
+          <h2 class="arch__head-title">Intendra Customer Behavior Intelligence Architecture</h2>
+        </div>
+        <div class="arch__rule reveal" aria-hidden="true"></div>
+
+        <div class="arch__grid reveal">
+
+          <!-- Inputs -->
+          <div class="arch__zone">
+            <div class="arch__label"><span class="arch__dot"></span>Every signal</div>
+            <div class="arch__cards">
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h3l2 5-2 1a11 11 0 005 5l1-2 5 2v3a2 2 0 01-2 2A16 16 0 014 5a2 2 0 012-2z"/></svg>
+                <span>Voice &amp; calls</span>
+              </div>
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11 7L4 20l1-4A8 8 0 1121 12z"/></svg>
+                <span>Chat &amp; messaging</span>
+              </div>
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="8" width="16" height="11" rx="2.5"/><path d="M12 8V4M9 4h6"/><circle cx="9" cy="13" r="1"/><circle cx="15" cy="13" r="1"/></svg>
+                <span>Chatbots</span>
+              </div>
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+                <span>Email &amp; tickets</span>
+              </div>
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 9h6M9 13h6M9 17h4"/></svg>
+                <span>Surveys</span>
+              </div>
+              <div class="arch__card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="12" r="2.2"/><circle cx="18" cy="6" r="2.2"/><circle cx="18" cy="18" r="2.2"/><path d="M8 11l8-4M8 13l8 4"/></svg>
+                <span>Social &amp; reviews</span>
+              </div>
+              <div class="arch__card arch__card--signal">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>Silent signals</span>
+                <span class="arch__soon">Emerging</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch__arrow" aria-hidden="true">
+            <span class="arch__flow"><i></i><i></i><i></i></span>
+          </div>
+
+          <!-- Engine -->
+          <div class="arch__engine">
+            <div class="arch__label arch__label--engine"><span class="arch__dot arch__dot--green"></span>The Intendra engine</div>
+            <div class="arch__engine-grid">
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="6"/><path d="M20 20l-4-4"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">01</span> Analyze <span class="arch__tag">Pulse</span></h4>
+                  <p>Intent, cost, and effort on 100% of interactions.</p>
+                </div>
+              </div>
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3 8 4-16 3 8h4"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">02</span> Diagnose <span class="arch__tag">Compass</span></h4>
+                  <p>Root causes mapped on a Value–Irritant matrix.</p>
+                </div>
+              </div>
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="4" width="12" height="16" rx="2"/><path d="M9 12l2 2 4-4"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">03</span> Prescribe <span class="arch__tag">Compass</span></h4>
+                  <p>The next best action, ranked by business impact.</p>
+                </div>
+              </div>
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19a8 8 0 0116 0"/><path d="M12 15l4-3"/><circle cx="12" cy="15" r="1.3"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">04</span> Score <span class="arch__tag">Profile</span></h4>
+                  <p>Agent performance surfaced from 100% of their work — who's best at what.</p>
+                </div>
+              </div>
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h4l3 5M4 17h4l4-10h8M15 4l3 3-3 3"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">05</span> Route <span class="arch__tag">FIT</span></h4>
+                  <p>Each intent to its best-fit channel and associate.</p>
+                </div>
+              </div>
+              <div class="arch__step">
+                <span class="arch__step-ic">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8M15 7h6v6"/></svg>
+                </span>
+                <div class="arch__step-body">
+                  <h4 class="arch__step-title"><span class="arch__step-num">06</span> Measure</h4>
+                  <p>Baseline, target, and result on every initiative. The outcome feeds the next cycle.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="arch__arrow" aria-hidden="true">
+            <span class="arch__flow"><i></i><i></i><i></i></span>
+          </div>
+
+          <!-- Outputs -->
+          <div class="arch__zone">
+            <div class="arch__label"><span class="arch__dot arch__dot--ink"></span>What you get</div>
+            <div class="arch__cards">
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L4 14h7l-1 8 9-12h-7z"/></svg>
+                <span>The next best action</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M4 20a5 5 0 0110 0M16 11l2 2 4-4"/></svg>
+                <span>Routed to the right person</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l6 6 4-4 8 8M21 17v-6h-6"/></svg>
+                <span>Lower cost &amp; friction</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20a6 6 0 0112 0M16 6a3 3 0 010 6M21 20a6 6 0 00-4-5.6"/></svg>
+                <span>Coached, stronger teams</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="2.5"/><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="12" r="2.5"/><path d="M6 8.5v7M8.5 6.5h3a3 3 0 013 3M8.5 17.5h3a3 3 0 003-3"/></svg>
+                <span>Root cause you can prove</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1.2"/></svg>
+                <span>An owner, a baseline, a target</span>
+              </div>
+              <div class="arch__card arch__card--out">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7-10-7-10-7z"/><circle cx="12" cy="12" r="3"/></svg>
+                <span>At-risk customers surfaced</span>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="arch__loop reveal" aria-hidden="true">
+          <svg viewBox="0 0 1000 60" preserveAspectRatio="none">
+            <path class="arch__loop-path" d="M985 6 C 985 48, 720 54, 500 54 C 280 54, 15 48, 15 6" />
+            <path class="arch__loop-head" d="M22 0 L15 6 L22 12" />
+          </svg>
+          <span class="arch__loop-label">The outcome feeds the next cycle</span>
+        </div>
+
+        <div class="arch__interface reveal">
+          <span class="arch__interface-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11 7L4 20l1-4A8 8 0 1121 12z"/><path d="M9.5 10.5a2.5 2.5 0 013.9-2 2.2 2.2 0 01-.9 4c0 .8 0 1.2 0 1.2M12.5 16h.01"/></svg>
+          </span>
+          <p class="arch__interface-text"><strong>Ask Intendra</strong> is how you reach all of it — every signal, step, and outcome, in plain language. Ask a question, get the answer, the action, and the why.</p>
+          <span class="arch__interface-tag">Your way in</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- Product doors -->
+    <section id="platform" class="section--light">
+      <div class="container">
+        <h2 class="reveal" style="text-align:center;">Five products. One engine.</h2>
+        <p class="reveal" style="text-align:center; max-width: 600px; margin: var(--space-3) auto 0; color: var(--text-on-light-muted);">One question each. The product name is the answer.</p>
+
+        <div class="product-doors reveal-stagger">
+          <div class="card product-door reveal" style="background: var(--surface-card-light); color: var(--text-on-light);">
+            <span class="product-door__icon"><img src="assets/icons/Product_Pulse.png" alt="" width="52" height="52" /></span>
+            <h3 class="product-door__q">Why did customers contact us, and what did it cost?</h3>
+            <span class="product-door__name">Pulse™</span>
+            <p class="product-door__desc">Every interaction classified against a proprietary intent library, with cost and effort attached. 100% coverage, &gt;97% accuracy.</p>
+            <a href="products.html" class="product-door__link">Learn more →</a>
+          </div>
+
+          <div class="card product-door reveal" style="background: var(--surface-card-light); color: var(--text-on-light);">
+            <span class="product-door__icon"><img src="assets/icons/Product_Compass.png" alt="" width="52" height="52" /></span>
+            <h3 class="product-door__q">What would make it stop, and who owns that?</h3>
+            <span class="product-door__name">Compass™</span>
+            <p class="product-door__desc">Root cause attributed to people, process, policy, or external. The action — eliminate, digitise, simplify, leverage, preempt — priced and assigned to the function that controls it.</p>
+            <a href="products.html" class="product-door__link">Learn more →</a>
+          </div>
+
+          <div class="card product-door reveal" style="background: var(--surface-card-light); color: var(--text-on-light);">
+            <span class="product-door__icon"><img src="assets/icons/Product_Profile.png" alt="" width="52" height="52" /></span>
+            <h3 class="product-door__q">Who do we coach, and on what?</h3>
+            <span class="product-door__name">Profile™</span>
+            <p class="product-door__desc">Stars, anchors, sleepers, and weak links — every associate placed on effectiveness and efficiency, from 100% of their work.</p>
+            <a href="products.html" class="product-door__link">Learn more →</a>
+          </div>
+        </div>
+
+        <div class="product-exclusive reveal">
+          <div class="product-exclusive__head">
+            <span class="product-exclusive__badge">Only at Intendra</span>
+            <p class="product-exclusive__note">Two capabilities no conversation-first tool can deliver.</p>
+          </div>
+          <div class="product-doors product-doors--exclusive">
+            <div class="card product-door product-door--reveal reveal">
+              <span class="product-door__icon"><img src="assets/icons/Product_Reveal.png" alt="" width="52" height="52" /></span>
+              <h3 class="product-door__q">Who is leaving without telling us?</h3>
+              <span class="product-door__name">Reveal™</span>
+              <p class="product-door__desc">92% of unhappy customers never complain. Reveal finds them before they go.</p>
+              <a href="products.html" class="product-door__link product-door__link--dark">Learn more →</a>
+            </div>
+
+            <div class="card product-door product-door--reveal reveal">
+              <span class="product-door__icon"><img src="assets/icons/product-fit-512-transparent.png" alt="" width="52" height="52" /></span>
+              <h3 class="product-door__q">Who should handle what?</h3>
+              <span class="product-door__name">FIT</span>
+              <p class="product-door__desc">The best channel for each intent, the best associate for each intent, and the best associate for each customer type.</p>
+              <a href="products.html" class="product-door__link product-door__link--dark">Learn more →</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Outcomes -->
+    <section class="section--light">
+      <div class="container">
+        <p class="eyebrow reveal">The impact</p>
+        <h2 class="reveal" style="text-align:center;">Smarter CX. Lower cost. Greater loyalty. Higher revenue.</h2>
+        <p class="reveal" style="text-align:center; max-width: 640px; margin-inline: auto;">Six measurable results, all from the same interaction data.</p>
+
+        <div class="outcomes-list reveal-stagger">
+          <div class="outcome reveal">
+            <div class="outcome__metric">15–25pt</div>
+            <h3 class="outcome__title">Elevated customer experience</h3>
+            <p class="outcome__desc">Higher digital containment and first-contact resolution.</p>
+          </div>
+          <div class="outcome reveal">
+            <div class="outcome__metric">20–40%</div>
+            <h3 class="outcome__title">Greater operational efficiency</h3>
+            <p class="outcome__desc">Lower assisted contacts within 12–28 months, and continuing.</p>
+          </div>
+          <div class="outcome reveal">
+            <div class="outcome__metric">20–40pt</div>
+            <h3 class="outcome__title">Empowered frontline</h3>
+            <p class="outcome__desc">Better-coached agents, with a double-digit reduction in annual agent churn.</p>
+          </div>
+          <div class="outcome reveal">
+            <div class="outcome__metric">100%</div>
+            <h3 class="outcome__title">Complete visibility</h3>
+            <p class="outcome__desc">Hidden friction, silent dissatisfaction, and unmet needs across every channel.</p>
+          </div>
+          <div class="outcome reveal">
+            <div class="outcome__metric outcome__metric--soft">By design</div>
+            <h3 class="outcome__title">Smarter service design</h3>
+            <p class="outcome__desc">Friction removed at the root, not patched with chatbots.</p>
+          </div>
+          <div class="outcome reveal">
+            <div class="outcome__metric outcome__metric--soft">Churn ↓</div>
+            <h3 class="outcome__title">Higher sustained revenue</h3>
+            <p class="outcome__desc">Lower churn, with sharper cross-sell and upsell.</p>
+          </div>
+        </div>
+
+        <p class="reveal" style="text-align:center; max-width: 680px; margin: var(--space-12) auto 0; font-weight: var(--weight-semibold); color: var(--text-on-light);">Intendra takes you to the decision — priced, owned, ready. Your team ships it.</p>
+
+        <div class="worked-example reveal">
+          <span class="worked-example__eyebrow">Worked example</span>
+          <h3 style="font-size: var(--text-h2);">What one eliminated intent is worth</h3>
+          <ol class="worked-example__steps">
+            <li><strong>Detected.</strong> Pulse flags 4,200 "billing dispute" contacts a month.</li>
+            <li><strong>Traced.</strong> Compass ties 61% to one cause — a delayed-refund policy.</li>
+            <li><strong>Prescribed.</strong> Eliminate it: auto-refund inside 48 hours, no call.</li>
+            <li><strong>Valued.</strong> 2,562 contacts gone a month, worth <span class="worked-example__value">~$553K a year</span>.</li>
+          </ol>
+        </div>
+
+        <p class="proof-disclaimer reveal">Illustrative example. Actual results vary by client and will be replaced with verified customer data.</p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="container">
+        <h2 class="reveal" style="text-align:center;">Questions, answered</h2>
+
+        <div class="faq-list reveal-stagger">
+          <div class="faq-item reveal">
+            <button type="button" class="faq-item__question" aria-expanded="true">
+              I already have a feedback tool. Why do I need this?
+              <span class="faq-item__chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__answer">
+              <p>Keep it. Intendra adds what it doesn't do: agent QA across 100% of interactions and a costed action for every intent. It sits alongside your existing stack, then expands.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button" class="faq-item__question" aria-expanded="false">
+              Does Intendra fix the problems, or just find them?
+              <span class="faq-item__chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__answer">
+              <p>It takes you to the decision. You get a priced initiative with a baseline, a target, and the owner who controls the lever. Your team ships the fix in their own tools, then brings the result back to the review.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button" class="faq-item__question" aria-expanded="false">
+              Isn't this just AI guessing?
+              <span class="faq-item__chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__answer">
+              <p>No. Root cause is attributed to people, process, policy, or an external event — or left blank when the data can't support it, never hallucinated. Ambiguous calls route to human review, and every cost shows its working.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button" class="faq-item__question" aria-expanded="false">
+              Why not just point ChatGPT at our support tickets?
+              <span class="faq-item__chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__answer">
+              <p>A general model gives a one-off answer that resets with every prompt. Intendra keeps a persistent, costed, causal model of your whole operation — and Ask Intendra reasons over cost, cause, and owner, not just what was said.</p>
+            </div>
+          </div>
+          <div class="faq-item reveal">
+            <button type="button" class="faq-item__question" aria-expanded="false">
+              How does our data get in?
+              <span class="faq-item__chevron" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-item__answer">
+              <p>Secure intake via SFTP or API — no manual tagging, no sampling. Native connectors to your CX and BI stack are on the roadmap; ask us which are live for your setup.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container reveal" style="text-align:center;">
+        <h2>Every word. Every move. Every silence.<br>Turned into action.</h2>
+        <p style="max-width: 520px; margin: var(--space-3) auto 0;">See what your own customer behavior is telling you — and what to do about it.</p>
+        <a href="contact.html" class="btn btn--primary final-cta__btn">Book a Demo →</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid footer-grid--4col">
+      <div>
+        <img src="assets/logos/wordmark/intendra-wordmark-green.png" alt="Intendra AI" width="150" height="32" />
+        <p>Eliminating friction. Activating insight.</p>
+      </div>
+      <div>
+        <h4>Product</h4>
+        <ul>
+          <li><a href="products.html">Pulse</a></li>
+          <li><a href="products.html">Compass</a></li>
+          <li><a href="products.html">Profile</a></li>
+          <li><a href="products.html">FIT</a></li>
+          <li><a href="products.html">Reveal</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Company</h4>
+        <ul>
+          <li><a href="about.html">About</a></li>
+          <li><a href="solutions.html#services">Services</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Resources</h4>
+        <ul>
+          <li><a href="news.html">News</a></li>
+          <li><a href="resources.html#articles">Articles</a></li>
+          <li><a href="resources.html#podcasts">Podcasts</a></li>
+          <li><a href="resources.html#case-studies">Case Studies</a></li>
+          <li><a href="index.html#faq">FAQ</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container footer-bottom">
+      <p>&copy; 2026 Intendra AI</p>
+      <div class="footer-bottom__social">
+        <a href="#" aria-label="LinkedIn">in</a>
+        <a href="#" aria-label="X">𝕏</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/main.js?v=31"></script>
+  <script src="js/animations.js?v=25"></script>
+</body>
+</html>

@@ -1,0 +1,157 @@
+/* Design tokens — Intendra AI Design System, LIGHT-first.
+   Sourced from the brand asset factory ("Fabrica de assets" → templates/prototypes/tokens).
+   White page, obsidian text, brilliant-green accent, Hanken Grotesk type. The footer is
+   the one intentionally dark surface (--surface-inverse). */
+
+@font-face {
+  font-family: "Hanken Grotesk";
+  font-style: normal;
+  font-weight: 300 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/hankengrotesk/v10/ieVw2YZDLWuGJpnzaCtY_z0oPqYbSFa_2r7Btw.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F63fjptAgt5VM-kVkqdyU8n1i8q131nj-o.woff2) format("woff2");
+}
+@font-face {
+  font-family: "IBM Plex Mono";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/ibmplexmono/v19/-F6qfjptAgt5VM-kVkqdyU8n3oQCzwOG9nCu.woff2) format("woff2");
+}
+
+:root {
+  /* Color — primary (unchanged from design system) */
+  --color-brilliant-green: #1BEA87;
+  --color-stone: #E0E0E0;
+  --color-graphite: #4E525B;
+  --color-obsidian: #28282D;
+  /* Color — secondary (accents only — icon chips, tab underlines, never dominant) */
+  --color-aqua-circuit: #62D6E7;
+  --color-neural-violet: #8A73BA;
+  --color-lime-insight: #C9E04F;
+  --color-teal-flow: #3FBCB9;
+  --color-cloud-mist: #B8C2DD;
+  /* Color — derived */
+  --color-danger: oklch(58% 0.19 25);
+  --color-danger-surface: oklch(96% 0.03 25);
+  --color-white: #FFFFFF;
+
+  /* Color — semantic aliases (light-first, from the brand asset factory) */
+  --bg-page: var(--color-white);
+  --bg-canvas: #F8FAFB;
+  --bg-light: #F8FAFB;
+  --surface-card: var(--color-white);
+  --surface-card-light: var(--color-white);
+  --surface-sunken: #F5F6F8;
+  --surface-inverse: var(--color-obsidian);
+  --surface-brand: var(--color-brilliant-green);
+
+  --text-primary: var(--color-obsidian);
+  --text-secondary: var(--color-graphite);
+  --text-muted: #8A8D93;
+  --text-on-brand: var(--color-obsidian);
+  --text-on-inverse: var(--color-stone);
+  --text-inverse-strong: var(--color-white);
+  --text-on-light: var(--color-obsidian);
+  --text-on-light-muted: var(--color-graphite);
+  --text-link: var(--color-graphite);
+  --text-link-hover: var(--color-obsidian);
+
+  --border-default: #D8D9DC;
+  --border-brand: rgba(27, 234, 135, 0.28);
+  --border-light: #E2E3DD;
+  --border-strong: var(--color-graphite);
+  --border-focus: var(--color-obsidian);
+
+  --accent: var(--color-brilliant-green);
+  --accent-hover: #17C973;
+  --accent-active: #13AD62;
+  --accent-ink: #0E7A47; /* green text that reads on white */
+  --gradient-brand: linear-gradient(135deg, var(--color-brilliant-green) 0%, var(--color-teal-flow) 100%);
+  --success: var(--color-brilliant-green);
+  --success-surface: #E8FCF3;
+  --warning: var(--color-lime-insight);
+  --warning-surface: #F9FBE9;
+  --info: var(--color-aqua-circuit);
+  --info-surface: #EAFAFC;
+  --danger-fg: var(--color-danger);
+  --danger-surface: var(--color-danger-surface);
+
+  /* Type — Hanken Grotesk (brand asset factory) */
+  --font-display: "Hanken Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-body: "Hanken Grotesk", ui-sans-serif, -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-mono: "IBM Plex Mono", "SFMono-Regular", Consolas, monospace;
+
+  --weight-light: 300;
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+  --weight-bold: 700;
+  --weight-extrabold: 800;
+
+  --text-display-xl: 4.5rem;
+  --text-display-l: 3rem;
+  --text-display-m: 2rem;
+  --text-h1: 1.75rem;
+  --text-h2: 1.5rem;
+  --text-h3: 1.25rem;
+  --text-body-l: 1.125rem;
+  --text-body: 1rem;
+  --text-body-s: 0.875rem;
+  --text-caption: 0.75rem;
+
+  --leading-tight: 1.15;
+  --leading-snug: 1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed: 1.65;
+
+  --tracking-tight: -0.02em;
+  --tracking-normal: 0em;
+  --tracking-wide: 0.04em;
+
+  /* Spacing — 4px scale */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 20px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-10: 40px;
+  --space-12: 48px;
+  --space-16: 64px;
+  --space-20: 80px;
+  --space-24: 96px;
+  --space-32: 128px;
+
+  /* Radii */
+  --radius-xs: 4px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --radius-symbol: 22%;
+  --radius-pill: 999px;
+  --radius-full: 50%;
+
+  /* Shadows & motion */
+  --shadow-xs: 0 1px 2px rgba(40,40,45,0.06);
+  --shadow-sm: 0 2px 6px rgba(40,40,45,0.08);
+  --shadow-md: 0 6px 16px rgba(40,40,45,0.10);
+  --shadow-lg: 0 16px 40px rgba(40,40,45,0.14);
+  --shadow-focus-ring: 0 0 0 3px rgba(27,234,135,0.35);
+  --ease-standard: cubic-bezier(.4,0,.2,1);
+  --ease-out: cubic-bezier(0,0,.2,1);
+  --duration-fast: 120ms;
+  --duration-base: 180ms;
+  --duration-slow: 280ms;
+
+  /* Site-specific layout tokens (not part of the brand design system) */
+  --container-max: 1200px;
+}

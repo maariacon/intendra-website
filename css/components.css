@@ -1,0 +1,168 @@
+/* Buttons — pill-shaped, matching the reference build (design system spec uses --radius-md;
+   this project overrides to --radius-pill to match the live reference exactly) */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-6);
+  font-family: var(--font-body);
+  font-size: var(--text-body-s);
+  font-weight: var(--weight-semibold);
+  border-radius: var(--radius-pill);
+  border: 1.5px solid transparent;
+  cursor: pointer;
+  transition: background var(--duration-fast) var(--ease-standard),
+              transform var(--duration-fast) var(--ease-standard),
+              box-shadow var(--duration-fast) var(--ease-standard);
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:focus-visible {
+  outline: none;
+  box-shadow: var(--shadow-focus-ring);
+}
+
+.btn--primary {
+  background: var(--accent);
+  color: var(--text-on-brand);
+}
+
+.btn--primary:hover {
+  background: var(--accent-hover);
+}
+
+.btn--primary:active {
+  background: var(--accent-active);
+}
+
+.btn--secondary {
+  background: var(--color-obsidian);
+  color: #fff;
+}
+
+.btn--secondary:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn--inverse {
+  background: var(--color-obsidian);
+  color: var(--accent);
+}
+
+.btn--inverse:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.btn--outline {
+  background: transparent;
+  border-color: rgba(224, 224, 224, 0.25);
+  color: var(--text-primary);
+}
+
+section.section--light .btn--outline,
+section.section--brand .btn--outline {
+  border-color: rgba(40, 40, 45, 0.25);
+  color: var(--text-on-light);
+}
+
+.btn--ghost {
+  background: transparent;
+  color: var(--text-primary);
+}
+
+.btn--danger {
+  background: var(--danger-fg);
+  color: #fff;
+}
+
+/* Cards — matches components/surfaces/Card.jsx, dark-translucent by default per the reference */
+.card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+  padding: var(--space-5);
+  transition: transform var(--duration-base) var(--ease-standard),
+              box-shadow var(--duration-base) var(--ease-standard);
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-md);
+}
+
+/* Formerly a dark contrast block — now a light elevated panel to keep the
+   whole page bright. (Kept the .card--dark class name so markup is unchanged.) */
+.card--dark {
+  background: var(--surface-card);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-md);
+  padding: var(--space-8);
+  color: var(--text-primary);
+}
+
+/* Doubled-up selectors (.card--dark.card--dark) outrank `section.section--light h2/p`. */
+.card--dark.card--dark h2,
+.card--dark.card--dark h3 {
+  color: var(--text-primary);
+}
+
+.card--dark.card--dark p {
+  color: var(--text-secondary);
+}
+
+.card--dark .badge {
+  background: rgba(27, 234, 135, 0.16);
+  color: var(--accent-ink);
+}
+
+/* Forms — matches components/forms/Input.jsx */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  margin-bottom: var(--space-6);
+}
+
+.field label {
+  font-size: var(--text-body-s);
+  font-weight: var(--weight-medium);
+  color: var(--text-primary);
+}
+
+.field input,
+.field textarea {
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  padding: 9px var(--space-3);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-default);
+  background: var(--surface-card);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.field input:focus,
+.field textarea:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--shadow-focus-ring);
+}
+
+/* Badge — matches components/feedback/Badge.jsx (tone="brand") */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: var(--radius-pill);
+  background: rgba(27, 234, 135, 0.16);
+  color: #0E7A47;
+  font-size: var(--text-caption);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-wide);
+  text-transform: uppercase;
+}

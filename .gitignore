@@ -1,0 +1,12 @@
+# OS / editor cruft
+.DS_Store
+*.log
+Thumbs.db
+
+# Dependencies (if any tooling is added later)
+node_modules/
+.env
+.env.*
+
+# Source material not meant for publishing
+assets/_source-dump-not-for-handoff/

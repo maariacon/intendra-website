@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(curl -sI http://localhost:8743/index.html)",
+      "Bash(lsof -ti:8743)",
+      "Bash(xargs kill)"
+    ]
+  }
+}

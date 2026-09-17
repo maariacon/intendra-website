@@ -1,0 +1,1019 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Intendra — capture</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@1,9..144,400;1,9..144,500&display=swap" />
+  <link rel="stylesheet" href="css/variables.css?v=37" />
+  <link rel="stylesheet" href="css/base.css?v=37" />
+  <link rel="stylesheet" href="css/layout.css?v=59" />
+  <link rel="stylesheet" href="css/components.css?v=37" />
+  <link rel="stylesheet" href="css/animations.css?v=37" />
+  <style>
+    html, body { margin: 0; background: #0d1512; }
+    .stage {
+      width: 1600px; height: 900px; position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+      background: #28282D;
+      font-family: "Hanken Grotesk", system-ui, sans-serif;
+    }
+
+    /* Branded video-background frame (from the Intendra design) */
+    @keyframes bg-drift { 0% { transform: translate3d(0,0,0); } 100% { transform: translate3d(0,-80px,0); } }
+    @keyframes bg-spin { to { transform: rotate(360deg); } }
+    @keyframes bg-rail { 0% { transform: translateX(0); } 100% { transform: translateX(1280px); } }
+    .frame { position: absolute; inset: 0; z-index: 0; overflow: hidden; pointer-events: none; }
+    .frame__star { position: absolute; }
+    .frame__star img { width: 100%; height: 100%; object-fit: contain; display: block; }
+    .frame__star--big { left: -217px; bottom: -250px; width: 633px; height: 633px; opacity: .5; }
+    .frame__star--big img { animation: bg-spin 240s linear infinite; }
+    .frame__star--sm { right: -167px; top: 167px; width: 350px; height: 350px; opacity: .28; }
+    .frame__star--sm img { animation: bg-spin 320s linear infinite reverse; }
+    .frame__blocks { position: absolute; inset: 0; }
+    .frame__wm { position: absolute; left: 60px; top: 47px; height: 32px; width: auto; z-index: 4; }
+    .frame__sym { position: absolute; right: 60px; top: 40px; height: 46px; width: auto; z-index: 4; }
+    .frame__tag { position: absolute; right: 60px; bottom: 37px; display: flex; align-items: center; gap: 16px; z-index: 4; }
+    .frame__tag i { width: 14px; height: 14px; background: #1BEA87; border-radius: 0 22% 0 0; display: block; }
+    .frame__tag span { font-size: 19px; color: #E0E0E0; font-weight: 400; }
+    .plate { position: absolute; left: 100px; top: 61px; width: 1400px; height: 778px; z-index: 2; pointer-events: none; overflow: hidden; }
+    .plate__rail { position: absolute; top: 0; left: 0; width: 120px; height: 2px; background: #1BEA87; animation: bg-rail 16s linear infinite; }
+    .plate__br-tl { position: absolute; left: 0; top: 0; width: 48px; height: 48px; border-top: 3px solid #1BEA87; border-left: 3px solid #1BEA87; }
+    .plate__br-br { position: absolute; right: 0; bottom: 0; width: 48px; height: 48px; border-bottom: 3px solid #1BEA87; border-right: 3px solid #1BEA87; }
+    .win { width: 1400px; background: #fff; border-radius: 18px; box-shadow: 0 40px 120px rgba(0,0,0,0.55); overflow: hidden; position: relative; z-index: 1; }
+    .win__bar { display: flex; align-items: center; gap: 8px; padding: 15px 20px; background: #f4f6f4; border-bottom: 1px solid #e6e8e6; }
+    .win__dot { width: 11px; height: 11px; border-radius: 50%; background: #d3d6d3; }
+    .win__url { margin-left: 14px; font-family: "IBM Plex Mono", monospace; font-size: 14px; color: #9aa0a0; }
+    .win__body { padding: 26px 34px 30px; height: 726px; box-sizing: border-box; position: relative; }
+    .win__head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+    .win__headL { display: inline-flex; align-items: center; gap: 12px; }
+    .win__brand { font-size: 20px; font-weight: 800; color: #28282D; letter-spacing: -.01em; }
+    .win__brand b { color: #0E7A47; }
+    .win__product { font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #0E7A47; background: rgba(27,234,135,.14); padding: 5px 12px; border-radius: 999px; }
+    .win__product:empty { display: none; }
+    .win__live { font-size: 14px; color: #6b7280; display: inline-flex; align-items: center; gap: 7px; }
+    .win__live i { width: 8px; height: 8px; border-radius: 50%; background: #1BEA87; display: inline-block; }
+
+    .turn { display: none; flex-direction: column; gap: 16px; }
+    .turn.active { display: flex; }
+
+    .q { align-self: flex-end; max-width: 72%; background: #28282D; color: #fff; padding: 14px 19px; border-radius: 16px 16px 4px 16px; font-size: 19px; line-height: 1.4; opacity: 0; transform: translateY(26px) scale(.94); transition: opacity .45s ease, transform .45s cubic-bezier(.2,.8,.2,1); }
+    .q.show { opacity: 1; transform: none; }
+    .typing { align-self: flex-start; display: inline-flex; align-items: center; gap: 10px; opacity: 0; transition: opacity .3s ease; }
+    .typing.show { opacity: 1; }
+    .typing__i { width: 34px; height: 34px; border-radius: 50%; background: #1BEA87; color: #06371f; display: flex; align-items: center; justify-content: center; font-weight: 800; font-family: "IBM Plex Mono", monospace; }
+    .typing__dots { display: inline-flex; gap: 5px; padding: 12px 14px; background: #f1f3f2; border-radius: 14px; }
+    .typing__dots span { width: 7px; height: 7px; border-radius: 50%; background: #b7bdba; animation: blink 1.2s infinite; }
+    .typing__dots span:nth-child(2){ animation-delay: .2s; }
+    .typing__dots span:nth-child(3){ animation-delay: .4s; }
+    @keyframes blink { 0%,60%,100%{opacity:.3} 30%{opacity:1} }
+
+    .a { opacity: 0; transform: translateY(14px); transition: opacity .5s ease, transform .5s ease; }
+    .a.show { opacity: 1; transform: none; }
+    .a__summary { background: none; border: none; padding: 0; font-size: 17px; line-height: 1.5; color: #4b5563; margin-bottom: 16px; }
+
+    .item { opacity: 0; transform: translateY(14px) scale(.985); transition: opacity .4s ease, transform .4s cubic-bezier(.2,.8,.2,1); }
+    .item.show { opacity: 1; transform: none; }
+
+    /* Metric cards (T2/T5) — bigger, equal-height, bottom-aligned trend lines */
+    .win__body .app-mock__grid { grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 4px; }
+    .win__body .app-mock__grid .mmetric { display: flex; flex-direction: column; min-height: 244px; padding: 26px 28px; border-radius: 16px; }
+    .win__body .app-mock__grid .mmetric__label { font-size: 15px; letter-spacing: .05em; margin-bottom: 12px; }
+    .win__body .app-mock__grid .mmetric__row { gap: 12px; }
+    .win__body .app-mock__grid .mmetric__val { font-size: 46px; }
+    .win__body .app-mock__grid .mmetric__delta { font-size: 18px; }
+    .win__body .app-mock__grid .mspark { height: 76px; margin-top: auto; }
+    .win__body .app-mock__grid .mbar { height: 12px; margin-top: auto; }
+    .win__body .app-mock__grid .mmetric__note { font-size: 15px; margin-top: auto; color: var(--text-muted); }
+    /* T5 quality metrics: compact single row of 4 */
+    .win__body .app-mock__grid--row4 { grid-template-columns: repeat(4, 1fr); gap: 14px; }
+    .win__body .app-mock__grid--row4 { gap: 12px; }
+    .win__body .app-mock__grid--row4 .mmetric { min-height: 0; padding: 11px 15px; }
+    .win__body .app-mock__grid--row4 .mmetric__val { font-size: 25px; }
+    .win__body .app-mock__grid--row4 .mmetric__label { font-size: 11px; margin-bottom: 5px; }
+    .win__body .app-mock__grid--row4 .mmetric__note { font-size: 11px; margin-top: 5px; }
+
+    /* Quality score — channel × partner table */
+    .qmatrix { margin-top: 12px; }
+    .qmatrix__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
+    .qmatrix__title { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .09em; color: #6b7280; }
+    .qmatrix__link { font-size: 14px; font-weight: 700; color: #0E7A47; }
+    .qtable { display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr .85fr; }
+    .qth { font-size: 11px; font-weight: 700; letter-spacing: .07em; text-transform: uppercase; color: #9aa0a0; padding: 6px 10px 7px; border-bottom: 1px solid #e6e8e6; text-align: center; }
+    .qth--l { text-align: left; }
+    .qc { padding: 6px 10px; border-bottom: 1px solid #eff1f0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+    .qc--label { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 8px; font-size: 16px; font-weight: 600; color: #28282D; }
+    .qc__vol { font-size: 12px; color: #9aa0a0; font-weight: 500; }
+    .qc__v { font-size: 17px; font-weight: 800; color: #28282D; line-height: 1.1; }
+    .qc__n { font-size: 10px; color: #9aa0a0; }
+    .qc__dash { color: #c7cacf; font-size: 16px; }
+    .qc--bad { background: #FCECEC; border-radius: 8px; }
+    .qc--bad .qc__v { color: #D0362B; }
+    .qc--sum { border-top: 2px solid #e6e8e6; border-bottom: none; }
+    .qc--sum .qc__v { font-weight: 800; }
+
+    /* T2 six-metric view: 3 columns, tighter cards */
+    .win__body .app-mock__grid--6 { grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    .win__body .app-mock__grid--6 .mmetric { min-height: 170px; padding: 18px 20px; }
+    .win__body .app-mock__grid--6 .mmetric__val { font-size: 31px; }
+    .win__body .app-mock__grid--6 .mmetric__label { font-size: 13px; margin-bottom: 8px; }
+    .win__body .app-mock__grid--6 .mmetric__delta { font-size: 16px; }
+    .win__body .app-mock__grid--6 .mspark { height: 50px; }
+
+    /* Pulse scroll list */
+    .scroll-clip { height: 250px; overflow: hidden; margin-top: 8px; -webkit-mask-image: linear-gradient(#000 88%, transparent); mask-image: linear-gradient(#000 88%, transparent); }
+    .scroll-list { will-change: transform; }
+
+    /* Compass best action */
+    .compass { border: 1px solid #e6e8e6; border-left: 5px solid #1BEA87; border-radius: 14px; padding: 22px 26px; background: #fff; }
+    .compass__eyebrow { font-size: 13px; letter-spacing: .1em; text-transform: uppercase; color: #0E7A47; font-weight: 700; }
+    .compass__cause { font-size: 16px; color: #6b7280; margin: 12px 0 2px; }
+    .compass__action { font-size: 27px; font-weight: 700; color: #28282D; margin: 2px 0 0; line-height: 1.25; }
+    .impact { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 18px; }
+    .impact span { font-size: 16px; font-weight: 700; padding: 8px 16px; border-radius: 999px; background: rgba(27,234,135,.15); color: #0E7A47; }
+    .compass__route { margin-top: 18px; font-size: 16px; color: #28282D; }
+    .compass__route b { color: #0E7A47; }
+
+    /* Compass — ranked action list */
+    .actions { display: flex; flex-direction: column; gap: 14px; }
+    .action { display: grid; grid-template-columns: 58px 1fr; gap: 18px; align-items: center; border: 1px solid #e6e8e6; border-left: 4px solid #1BEA87; border-radius: 14px; padding: 16px 24px; background: #fff; }
+    .action--2, .action--3 { border-left-color: #c7cacf; }
+    .action__rank { font-size: 34px; font-weight: 800; color: #0E7A47; font-variant-numeric: tabular-nums; text-align: center; }
+    .action--2 .action__rank, .action--3 .action__rank { color: #9aa0a0; }
+    .action__cause { font-size: 14px; color: #6b7280; }
+    .action__title { font-size: 22px; font-weight: 700; color: #28282D; margin: 3px 0 10px; line-height: 1.2; }
+    .action__foot { display: flex; gap: 16px; flex-wrap: wrap; align-items: center; }
+    .action__impact { font-size: 15px; font-weight: 700; color: #0E7A47; background: rgba(27,234,135,.14); padding: 6px 13px; border-radius: 999px; }
+    .action__route { font-size: 14px; color: #6b7280; }
+
+    /* Compass quadrant zoom */
+    .quad { transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease, box-shadow .4s ease; }
+    .quad-grid.zooming .quad { opacity: .35; }
+    .quad.zoom { opacity: 1 !important; transform: scale(1.14); box-shadow: 0 20px 50px rgba(0,0,0,.18); z-index: 3; position: relative; }
+
+    /* Value-Irritant matrix */
+    .vmatrix { position: relative; padding: 4px 0 26px 30px; }
+    .vmatrix__grid { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; height: 400px; }
+    .vquad { border: 1px solid #e6e8e6; border-radius: 12px; padding: 16px 18px; background: #fff; display: flex; flex-direction: column; transition: transform .5s cubic-bezier(.2,.8,.2,1), opacity .4s ease, box-shadow .4s ease; }
+    .vquad__head { display: flex; align-items: center; }
+    .vquad__act { font-size: 13px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; }
+    .vquad__cost { margin-left: auto; font-size: 20px; font-weight: 800; color: #28282D; }
+    .vquad__intents { margin-top: 12px; display: flex; flex-direction: column; gap: 7px; }
+    .vquad__intent { font-size: 16px; color: #28282D; }
+    .vquad--leverage { border-top: 3px solid #12A150; } .vquad--leverage .vquad__act { color: #0E7A47; }
+    .vquad--digitize { border-top: 3px solid #1BEA87; } .vquad--digitize .vquad__act { color: #0E7A47; }
+    .vquad--simplify { border-top: 3px solid #F5A524; } .vquad--simplify .vquad__act { color: #B5730E; }
+    .vquad--eliminate { border-top: 3px solid #E5484D; } .vquad--eliminate .vquad__act { color: #C0353A; }
+    .vmatrix__ylabel { position: absolute; left: 0; top: 4px; bottom: 26px; width: 30px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); font-size: 12px; font-weight: 700; letter-spacing: .04em; color: #9aa0a0; white-space: nowrap; }
+    .vmatrix__xlabel { position: absolute; left: 30px; right: 0; bottom: 2px; text-align: center; font-size: 12px; font-weight: 700; letter-spacing: .04em; color: #9aa0a0; }
+    .vmatrix__grid.zooming .vquad { opacity: .32; }
+    .vquad.zoom { opacity: 1 !important; transform: scale(1.09); box-shadow: 0 20px 50px rgba(0,0,0,.18); z-index: 3; }
+
+    /* Profile performance quadrant */
+    .pquad { position: relative; height: 400px; border: 1px solid #e6e8e6; border-radius: 16px; background: linear-gradient(#ffffff, #fbfdfc); margin-top: 6px; }
+    .pquad__vline { position: absolute; left: 50%; top: 10px; bottom: 10px; width: 1px; background: #e6e8e6; }
+    .pquad__hline { position: absolute; top: 50%; left: 10px; right: 10px; height: 1px; background: #e6e8e6; }
+    .pquad__lbl { position: absolute; font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: .08em; color: #b0b6b3; }
+    .pquad__corner { position: absolute; font-size: 13px; font-weight: 700; color: #98a09b; }
+    .pquad__dot { position: absolute; width: 44px; height: 44px; border-radius: 50%; background: #e9f9f0; color: #0E7A47; font-weight: 800; font-size: 14px; display: flex; align-items: center; justify-content: center; transform: translate(-50%,-50%); border: 2px solid #1BEA87; box-shadow: 0 4px 12px rgba(0,0,0,.08); }
+    .pquad__dot.warn { background: #fff2e0; color: #B5730E; border-color: #F5A524; }
+
+    /* Profile — performance quadrant (native) */
+    .pq { display: grid; grid-template-columns: 1.55fr 1fr; gap: 22px; margin-top: 4px; }
+    .pq-plot { position: relative; height: 424px; border: 1px solid #e6e8e6; border-radius: 14px; background: linear-gradient(#ffffff, #fbfdfc); }
+    .pq-plot__v { position: absolute; left: 50%; top: 12px; bottom: 12px; width: 1px; background: #e9ebea; }
+    .pq-plot__h { position: absolute; top: 50%; left: 12px; right: 12px; height: 1px; background: #e9ebea; }
+    .pq-corner { position: absolute; font-size: 11px; font-weight: 700; color: #98a09b; }
+    .pq-corner--tl { left: 26px; top: 12px; } .pq-corner--tr { right: 14px; top: 12px; }
+    .pq-corner--bl { left: 26px; bottom: 26px; } .pq-corner--br { right: 14px; bottom: 26px; }
+    .pq-axis { position: absolute; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: #b0b6b3; }
+    .pq-axis--x { left: 0; right: 0; bottom: 3px; text-align: center; }
+    .pq-axis--y { left: -2px; top: 12px; bottom: 26px; width: 18px; display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+    .pq-dot { position: absolute; width: 15px; height: 15px; border-radius: 50%; background: #1BEA87; transform: translate(-50%,-50%); box-shadow: 0 2px 6px rgba(0,0,0,.12); }
+    .pq-dot--mid { background: #9adcb6; }
+    .pq-dot--bad { background: #E5484D; }
+    .pq-dot--ring { width: 17px; height: 17px; background: #0E7A47; box-shadow: 0 0 0 5px rgba(27,234,135,.22); }
+    .pq-dot--ring b { position: absolute; left: 24px; top: 50%; transform: translateY(-50%); white-space: nowrap; font-size: 13px; font-weight: 700; color: #28282D; }
+    .pq-axes { border: 1px solid #e6e8e6; border-radius: 14px; padding: 16px 18px; background: #fff; }
+    .pq-axes__title { font-size: 12px; font-weight: 800; text-transform: uppercase; letter-spacing: .08em; color: #6b7280; margin-bottom: 12px; }
+    .pq-axes__group { font-size: 13px; font-weight: 800; color: #0E7A47; margin: 14px 0 8px; }
+    .pq-axes__group:first-of-type { margin-top: 0; }
+    .pq-row { display: grid; grid-template-columns: 1fr 60px 22px; align-items: center; gap: 10px; margin-bottom: 7px; }
+    .pq-row span { font-size: 12.5px; color: #28282D; }
+    .pq-row i { height: 6px; border-radius: 4px; background: #1BEA87; display: block; }
+    .pq-row b { font-size: 13px; font-weight: 800; color: #28282D; text-align: right; }
+
+    /* Profile scorecard */
+    .scorecard { display: flex; flex-direction: column; gap: 8px; }
+    .score-row { display: grid; grid-template-columns: 42px 170px 1fr 56px; align-items: center; gap: 18px; }
+    .score-ava { width: 38px; height: 38px; border-radius: 50%; background: #e9f9f0; color: #0E7A47; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 14px; }
+    .score-name { font-size: 17px; font-weight: 600; color: #28282D; }
+    .score-track { height: 13px; background: #eceeec; border-radius: 7px; overflow: hidden; }
+    .score-fill { display: block; height: 100%; width: 0; border-radius: 7px; background: linear-gradient(90deg,#1BEA87,#12A150); transition: width .8s cubic-bezier(.2,.8,.2,1); }
+    .score-fill.warn { background: linear-gradient(90deg,#F5A524,#E5484D); }
+    .score-val { font-size: 19px; font-weight: 700; color: #28282D; text-align: right; }
+
+    /* FIT — channel-to-intent fit (native) */
+    .cfit-weights { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-bottom: 18px; }
+    .cfit-w__top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+    .cfit-w__top span:first-child { font-size: 14px; font-weight: 600; color: #28282D; }
+    .cfit-w__v { font-size: 15px; font-weight: 800; color: #0E7A47; font-variant-numeric: tabular-nums; }
+    .cfit-w__track { height: 7px; background: #eceeec; border-radius: 5px; }
+    .cfit-w__fill { display: block; height: 100%; width: 0; border-radius: 5px; background: linear-gradient(90deg,#1BEA87,#12A150); transition: width 1s cubic-bezier(.2,.8,.2,1); }
+    .cfit { display: grid; grid-template-columns: 1.7fr 1fr 1fr 1fr 1fr .9fr; }
+    .cfit__th { font-size: 11px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9aa0a0; padding: 6px 8px 8px; border-bottom: 1px solid #e6e8e6; text-align: center; }
+    .cfit__th--l { text-align: left; }
+    .fc { padding: 7px 8px; border-bottom: 1px solid #eff1f0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1px; }
+    .fc--l { flex-direction: row; align-items: baseline; justify-content: flex-start; gap: 8px; font-size: 15px; font-weight: 600; color: #28282D; }
+    .fc__fcr { font-size: 11px; color: #9aa0a0; font-weight: 500; }
+    .fc__v { font-size: 16px; font-weight: 800; color: #28282D; line-height: 1.1; }
+    .fc__n { font-size: 10px; color: #9aa0a0; }
+    .fc__dash { color: #c7cacf; font-size: 15px; }
+    .fc--j { font-weight: 700; color: #6b7280; font-size: 14px; }
+    .fc--best { background: rgba(27,234,135,.14); border-radius: 8px; }
+    .fc--best .fc__v { color: #0E7A47; }
+
+    /* FIT sliders + counting */
+    .fit-lead { font-size: 15px; color: #6b7280; margin-bottom: 6px; }
+    .sliders { display: flex; flex-direction: column; gap: 22px; }
+    .slider__top { display: flex; justify-content: space-between; font-size: 16px; color: #28282D; font-weight: 600; margin-bottom: 10px; }
+    .slider__top .fitv { color: #0E7A47; font-variant-numeric: tabular-nums; }
+    .slider__track { position: relative; height: 9px; background: #eceeec; border-radius: 6px; }
+    .slider__fill { position: absolute; left: 0; top: 0; height: 100%; width: 0; border-radius: 6px; background: linear-gradient(90deg,#1BEA87,#12A150); transition: width 1s cubic-bezier(.2,.8,.2,1); }
+    .slider--best .slider__fill { background: linear-gradient(90deg,#12A150,#0E7A47); }
+    .fit-result { margin-top: 6px; display: flex; align-items: center; justify-content: space-between; background: rgba(27,234,135,.12); border: 1px solid rgba(27,234,135,.4); border-radius: 12px; padding: 15px 20px; }
+    .fit-result strong { font-size: 18px; color: #28282D; }
+    .fit-result b { font-size: 22px; color: #0E7A47; }
+
+    /* FIT heatmap */
+    .heat { display: grid; grid-template-columns: 210px repeat(4, 1fr); gap: 8px; }
+    .heat__h { font-weight: 700; color: #6b7280; text-align: center; padding: 6px 0; font-size: 14px; }
+    .heat__rl { font-weight: 600; color: #28282D; display: flex; align-items: center; font-size: 15px; }
+    .heat__cell { border-radius: 9px; padding: 16px 0; text-align: center; font-weight: 800; font-size: 16px; color: #0b3d24; }
+    .heat__cell.best { outline: 2px solid #0E7A47; outline-offset: -2px; }
+    .heat__legend { margin-top: 12px; font-size: 13px; color: #9aa0a0; text-align: right; }
+
+    /* Sign-in intro */
+    .login { position: absolute; inset: 0; background: #f7f8f7; display: flex; align-items: center; justify-content: center; opacity: 1; transition: opacity .6s ease; z-index: 6; }
+    .login.gone { opacity: 0; pointer-events: none; }
+    .login__box { width: 460px; }
+    .login__mark { width: 66px; height: 66px; margin: 0 auto 14px; }
+    .login__mark img { width: 100%; height: 100%; display: block; }
+    .login__title { text-align: center; font-size: 34px; font-weight: 600; color: #28282D; margin: 4px 0 34px; letter-spacing: -.01em; }
+    .login__lbl { font-size: 12px; letter-spacing: .14em; color: #8a8f8c; font-weight: 700; }
+    .login__row { display: flex; justify-content: space-between; align-items: baseline; }
+    .login__forgot { font-size: 15px; color: #3a3f3c; }
+    .login__field { margin-top: 8px; margin-bottom: 20px; height: 54px; border: 1px solid #c9d4e8; border-radius: 10px; background: #eef2fb; display: flex; align-items: center; padding: 0 18px; font-size: 18px; color: #28282D; }
+    .login__txt { letter-spacing: 4px; font-size: 20px; line-height: 1; }
+    .login__caret { display: inline-block; width: 2px; height: 22px; background: #28282D; margin-left: 1px; animation: caret 1s steps(1) infinite; vertical-align: middle; }
+    @keyframes caret { 50% { opacity: 0; } }
+    .login__dots { letter-spacing: 4px; font-size: 20px; opacity: 0; transition: opacity .3s ease; }
+    .login__field.show .login__dots { opacity: 1; }
+    .login__btn { margin-top: 8px; width: 100%; height: 58px; border-radius: 10px; background: #177a46; color: #fff; font-size: 18px; font-weight: 600; border: none; cursor: pointer; transition: transform .15s ease, filter .15s ease; }
+    .login__btn.press { transform: scale(.985); filter: brightness(.88); }
+
+    /* real-recording media scenes */
+    .win { transition: opacity .5s ease; }
+    .win.dim { opacity: 0; }
+    .mscene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .5s ease; pointer-events: none; z-index: 5; }
+    .mscene.show { opacity: 1; }
+    .mvid { display: block; max-width: 1520px; max-height: 790px; width: auto; height: auto; border-radius: 16px; box-shadow: 0 40px 120px rgba(0,0,0,0.5); background: #0b1310; }
+
+    /* caption + outro */
+    .caption { display: none; }
+    .caption.show { opacity: 1; transform: translateY(0); }
+    /* Branded statement cards (Unwrap-style interstitials) */
+    .card-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity .55s ease; pointer-events: none; z-index: 7; overflow: hidden; background: rgba(40,40,45,0.86); }
+    .card-scene.show { opacity: 1; }
+    .card-squiggle { display: none; }
+    .card-text { position: relative; text-align: center; font-family: "Hanken Grotesk", system-ui, sans-serif; font-weight: 800; font-size: 78px; line-height: 1.08; color: #eef2f0; max-width: 1200px; letter-spacing: -.02em; padding: 0 60px; opacity: 0; transform: translateY(16px); transition: opacity .6s ease .12s, transform .6s cubic-bezier(.2,.8,.2,1) .12s; }
+    .card-scene.show .card-text { opacity: 1; transform: none; }
+    .card-text em { font-style: normal; font-weight: 800; color: #4ff0a6; }
+
+    .outro { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 22px; background: #0b0f0d; opacity: 0; transition: opacity .6s ease; pointer-events: none; z-index: 9; overflow: hidden; }
+    .outro.show { opacity: 1; }
+    .outro p { position: relative; color: #eef2f0; font-size: 54px; font-weight: 800; margin: 0; letter-spacing: -.02em; }
+    .outro .grad { font-style: normal; font-weight: 800; -webkit-text-fill-color: #4ff0a6; color: #4ff0a6; background: none; }
+    .outro__brand { position: absolute; bottom: 66px; width: 240px; height: auto; }
+
+    [hidden] { display: none !important; }
+  </style>
+</head>
+<body>
+  <div class="stage">
+
+    <!-- Branded background frame -->
+    <div class="frame">
+      <div class="frame__star frame__star--big"><img src="assets/images/reveal-starburst.png" alt=""></div>
+      <div class="frame__star frame__star--sm"><img src="assets/images/reveal-starburst.png" alt=""></div>
+      <div class="frame__blocks"></div>
+      <img class="frame__sym" src="assets/logos/symbol/intendra-symbol-white.png" alt="">
+    </div>
+    <div class="plate">
+      <div class="plate__rail"></div>
+      <div class="plate__br-tl"></div>
+      <div class="plate__br-br"></div>
+    </div>
+
+    <div class="win">
+      <div class="win__bar">
+        <span class="win__dot"></span><span class="win__dot"></span><span class="win__dot"></span>
+        <span class="win__url">app.intendra.ai</span>
+      </div>
+      <div class="win__body">
+
+        <!-- Sign-in intro -->
+        <div class="login" data-el="login">
+          <div class="login__box">
+            <div class="login__mark"><img src="assets/logos/favicon/android-chrome-512x512.png" alt="Intendra" /></div>
+            <h2 class="login__title">Sign in to Intendra</h2>
+            <div class="login__lbl">EMAIL</div>
+            <div class="login__field" data-el="email"><span class="login__txt"></span><span class="login__caret"></span></div>
+            <div class="login__row"><span class="login__lbl">PASSWORD</span><span class="login__forgot">Forgot password?</span></div>
+            <div class="login__field" data-el="pw"><span class="login__dots">•••••••••••••</span></div>
+            <button class="login__btn" data-el="signin">Sign in</button>
+          </div>
+        </div>
+
+        <div class="win__head">
+          <span class="win__headL">
+            <span class="win__brand">Ask <b>Intendra</b></span>
+            <span class="win__product" data-el="product"></span>
+          </span>
+          <span class="win__live"><i></i>live</span>
+        </div>
+
+        <!-- Reusable question shown in-window before a full-frame media clip -->
+        <div class="turn" data-turn="mq">
+          <div class="q"></div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+        </div>
+
+        <!-- T1 · Pulse — histogram + scrolling intent list -->
+        <div class="turn" data-turn="1">
+          <div class="q">Why do customers contact us, and what does it cost?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">The top intents drive most of the cost. Handling plus downstream, ranked and priced.</p>
+            <div class="item">
+              <div class="ask-pulse-head"><div class="demand-toggle"><button class="demand-toggle__btn is-active" type="button" tabindex="-1" data-metric="volume">Volume</button><button class="demand-toggle__btn" type="button" tabindex="-1" data-metric="cost">Cost</button></div></div>
+              <div class="demand-view demand-view--cost" data-metric="cost">
+                <div class="demand-chart">
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:34px"></span><span class="dbar__seg dbar__seg--handle" style="height:62px"></span><span class="dbar__val">$12.9K</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:33px"></span><span class="dbar__seg dbar__seg--handle" style="height:50px"></span><span class="dbar__val">$11.1K</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:13px"></span><span class="dbar__seg dbar__seg--handle" style="height:40px"></span><span class="dbar__val">$7.1K</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:9px"></span><span class="dbar__seg dbar__seg--handle" style="height:18px"></span><span class="dbar__val">$3.4K</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--down" style="height:8px"></span><span class="dbar__seg dbar__seg--handle" style="height:17px"></span><span class="dbar__val">$3.3K</span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:11px"></span><span class="dbar__seg dbar__seg--handle" style="height:18px"></span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:7px"></span><span class="dbar__seg dbar__seg--handle" style="height:14px"></span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--down" style="height:5px"></span><span class="dbar__seg dbar__seg--handle" style="height:9px"></span></div>
+                </div>
+                <div class="demand-legend"><span><i class="dot dot--handle"></i>handling</span><span><i class="dot dot--down"></i>downstream</span><span class="demand-legend__note">top 5 = 57% of cost</span></div>
+              </div>
+              <div class="demand-view demand-view--volume is-active" data-metric="volume">
+                <div class="demand-chart">
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:96px"></span><span class="dbar__val">2,034</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:56px"></span><span class="dbar__val">1,180</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:32px"></span><span class="dbar__val">680</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:31px"></span><span class="dbar__val">651</span></div>
+                  <div class="dbar dbar--top"><span class="dbar__seg dbar__seg--vol" style="height:19px"></span><span class="dbar__val">398</span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:9px"></span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:6px"></span></div>
+                  <div class="dbar"><span class="dbar__seg dbar__seg--vol" style="height:6px"></span></div>
+                </div>
+                <div class="demand-legend"><span><i class="dot dot--vol"></i>contacts analysed</span><span class="demand-legend__note">top 5 = 58% of 8,470</span></div>
+              </div>
+            </div>
+            <div class="app-mock__act item">
+              <span class="mmetric__label">Every intent · ranked by value</span>
+              <div class="scroll-clip">
+                <div class="scroll-list drank-list" data-scroll>
+                  <div class="drank"><div class="drank__name"><strong>Get a delivery update</strong><span class="act-sub">2,034 contacts · 58% resolved</span></div><div class="act-right"><span class="act-tag act-tag--digitize">Digitize</span><span class="act-val" data-vol="2,034" data-cost="$340K / yr">2,034</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Get a refund</strong><span class="act-sub">1,180 contacts · 60% resolved</span></div><div class="act-right"><span class="act-tag act-tag--eliminate">Eliminate</span><span class="act-val" data-vol="1,180" data-cost="$248K / yr">1,180</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Cancel my order</strong><span class="act-sub">680 contacts · 71% resolved</span></div><div class="act-right"><span class="act-tag act-tag--leverage">Leverage</span><span class="act-val" data-vol="680" data-cost="$154K / yr">680</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Where is my order?</strong><span class="act-sub">651 contacts · 44% resolved</span></div><div class="act-right"><span class="act-tag act-tag--digitize">Digitize</span><span class="act-val" data-vol="651" data-cost="$121K / yr">651</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Return an item</strong><span class="act-sub">398 contacts · 66% resolved</span></div><div class="act-right"><span class="act-tag act-tag--simplify">Simplify</span><span class="act-val" data-vol="398" data-cost="$92K / yr">398</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Item not as described</strong><span class="act-sub">286 contacts · 51% resolved</span></div><div class="act-right"><span class="act-tag act-tag--eliminate">Eliminate</span><span class="act-val" data-vol="286" data-cost="$83K / yr">286</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Damaged on arrival</strong><span class="act-sub">214 contacts · 49% resolved</span></div><div class="act-right"><span class="act-tag act-tag--eliminate">Eliminate</span><span class="act-val" data-vol="214" data-cost="$61K / yr">214</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Change delivery address</strong><span class="act-sub">190 contacts · 73% resolved</span></div><div class="act-right"><span class="act-tag act-tag--digitize">Digitize</span><span class="act-val" data-vol="190" data-cost="$47K / yr">190</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Update payment method</strong><span class="act-sub">158 contacts · 80% resolved</span></div><div class="act-right"><span class="act-tag act-tag--simplify">Simplify</span><span class="act-val" data-vol="158" data-cost="$39K / yr">158</span></div></div>
+                  <div class="drank"><div class="drank__name"><strong>Apply a promo code</strong><span class="act-sub">132 contacts · 77% resolved</span></div><div class="act-right"><span class="act-tag act-tag--leverage">Leverage</span><span class="act-val" data-vol="132" data-cost="$28K / yr">132</span></div></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T2 · Metrics (from HTML weekly view) -->
+        <div class="turn" data-turn="2">
+          <div class="q">How did the week go overall?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">A steady week. Volume rose 3% and cost rose with it, but effort eased, and quality and first-contact resolution both climbed.</p>
+            <div class="app-mock__grid app-mock__grid--6">
+              <div class="mmetric item">
+                <span class="mmetric__label">Contacts analysed</span>
+                <div class="mmetric__row"><span class="mmetric__val">8,470</span><span class="mmetric__delta mmetric__delta--up">+3%</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gA" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1BEA87" stop-opacity=".28"/><stop offset="1" stop-color="#1BEA87" stop-opacity="0"/></linearGradient></defs><path d="M0,34 17,33 34,32 51,28 68,29 85,24 102,20 120,14 L120,44 0,44 Z" fill="url(#gA)"/><polyline points="0,34 17,33 34,32 51,28 68,29 85,24 102,20 120,14" fill="none" stroke="#12A150" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+              <div class="mmetric item">
+                <span class="mmetric__label">Total cost to serve</span>
+                <div class="mmetric__row"><span class="mmetric__val">$66.9K</span><span class="mmetric__delta mmetric__delta--down">+3%</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gB" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#E5484D" stop-opacity=".24"/><stop offset="1" stop-color="#E5484D" stop-opacity="0"/></linearGradient></defs><path d="M0,32 17,31 34,30 51,28 68,26 85,22 102,18 120,13 L120,44 0,44 Z" fill="url(#gB)"/><polyline points="0,32 17,31 34,30 51,28 68,26 85,22 102,18 120,13" fill="none" stroke="#E5484D" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+              <div class="mmetric item">
+                <span class="mmetric__label">Cost per contact</span>
+                <div class="mmetric__row"><span class="mmetric__val">$7.90</span><span class="mmetric__delta mmetric__delta--up">&minus;2%</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gC" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1BEA87" stop-opacity=".28"/><stop offset="1" stop-color="#1BEA87" stop-opacity="0"/></linearGradient></defs><path d="M0,18 17,19 34,20 51,21 68,22 85,24 102,26 120,28 L120,44 0,44 Z" fill="url(#gC)"/><polyline points="0,18 17,19 34,20 51,21 68,22 85,24 102,26 120,28" fill="none" stroke="#12A150" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+              <div class="mmetric item">
+                <span class="mmetric__label">Customer effort · CES</span>
+                <div class="mmetric__row"><span class="mmetric__val">3.9</span><span class="mmetric__delta mmetric__delta--up">&minus;0.1</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gD" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1BEA87" stop-opacity=".28"/><stop offset="1" stop-color="#1BEA87" stop-opacity="0"/></linearGradient></defs><path d="M0,16 17,18 34,19 51,21 68,23 85,25 102,27 120,30 L120,44 0,44 Z" fill="url(#gD)"/><polyline points="0,16 17,18 34,19 51,21 68,23 85,25 102,27 120,30" fill="none" stroke="#12A150" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+              <div class="mmetric item">
+                <span class="mmetric__label">Quality score</span>
+                <div class="mmetric__row"><span class="mmetric__val">87</span><span class="mmetric__delta mmetric__delta--up">+1</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gE" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1BEA87" stop-opacity=".28"/><stop offset="1" stop-color="#1BEA87" stop-opacity="0"/></linearGradient></defs><path d="M0,30 17,28 34,29 51,25 68,24 85,22 102,18 120,15 L120,44 0,44 Z" fill="url(#gE)"/><polyline points="0,30 17,28 34,29 51,25 68,24 85,22 102,18 120,15" fill="none" stroke="#12A150" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+              <div class="mmetric item">
+                <span class="mmetric__label">First-contact resolution</span>
+                <div class="mmetric__row"><span class="mmetric__val">71%</span><span class="mmetric__delta mmetric__delta--up">+2pp</span></div>
+                <svg class="mspark" viewBox="0 0 120 44" preserveAspectRatio="none"><defs><linearGradient id="gF" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1BEA87" stop-opacity=".28"/><stop offset="1" stop-color="#1BEA87" stop-opacity="0"/></linearGradient></defs><path d="M0,33 17,31 34,30 51,27 68,25 85,23 102,20 120,16 L120,44 0,44 Z" fill="url(#gF)"/><polyline points="0,33 17,31 34,30 51,27 68,25 85,23 102,20 120,16" fill="none" stroke="#12A150" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" vector-effect="non-scaling-stroke"/></svg>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T3 · Compass — best action -->
+        <div class="turn" data-turn="3">
+          <div class="q">What is driving most of the volume and cost?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Three drivers create most of the avoidable cost: $523K/yr. Most of it starts upstream, before the contact ever reaches you.</p>
+            <div class="actions">
+              <div class="action action--1 item">
+                <div class="action__rank">01</div>
+                <div class="action__body">
+                  <div class="action__cause">Carrier misses the 2-day SLA on 18% of West-coast orders</div>
+                  <h4 class="action__title">Enforce carrier SLA + proactive delay alerts</h4>
+                  <div class="action__foot"><span class="action__impact">&minus;$248K / yr · &minus;31% WISMO</span><span class="action__route">Route: Logistics Ops</span></div>
+                </div>
+              </div>
+              <div class="action action--2 item">
+                <div class="action__rank">02</div>
+                <div class="action__body">
+                  <div class="action__cause">Refunds bounce between chat and email with no self-serve path</div>
+                  <h4 class="action__title">Self-serve returns + auto-refund under $50</h4>
+                  <div class="action__foot"><span class="action__impact">&minus;$154K / yr · &minus;22% refund contacts</span><span class="action__route">Route: Payments</span></div>
+                </div>
+              </div>
+              <div class="action action--3 item">
+                <div class="action__rank">03</div>
+                <div class="action__body">
+                  <div class="action__cause">No way to cancel or edit an order after checkout</div>
+                  <h4 class="action__title">In-app cancel &amp; edit order</h4>
+                  <div class="action__foot"><span class="action__impact">&minus;$121K / yr · &minus;18% cancel contacts</span><span class="action__route">Route: Product</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T4 · Compass — quadrant (zoom each) -->
+        <div class="turn" data-turn="4">
+          <div class="q">Show me the suggested value-irritant actions by intent.</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Every intent placed by its value to the company and to the customer. Each quadrant maps to the action that removes the most cost.</p>
+            <div class="vmatrix item">
+              <span class="vmatrix__ylabel">Value to the company &rarr;</span>
+              <div class="vmatrix__grid">
+                <div class="vquad vquad--simplify"><div class="vquad__head"><span class="vquad__act">Simplify</span><span class="vquad__cost">$103K</span></div><div class="vquad__intents"><span class="vquad__intent">Verify identity</span><span class="vquad__intent">Complete a payment</span></div></div>
+                <div class="vquad vquad--leverage"><div class="vquad__head"><span class="vquad__act">Leverage</span><span class="vquad__cost">$178K</span></div><div class="vquad__intents"><span class="vquad__intent">Upgrade or add a plan</span><span class="vquad__intent">Pre-sales product question</span></div></div>
+                <div class="vquad vquad--eliminate"><div class="vquad__head"><span class="vquad__act">Eliminate</span><span class="vquad__cost">$114K</span></div><div class="vquad__intents"><span class="vquad__intent">Report a late delivery</span><span class="vquad__intent">Item not as described</span></div></div>
+                <div class="vquad vquad--digitize"><div class="vquad__head"><span class="vquad__act">Digitize</span><span class="vquad__cost">$559K</span></div><div class="vquad__intents"><span class="vquad__intent">Where is my order?</span><span class="vquad__intent">Change delivery address</span><span class="vquad__intent">Cancel my order</span></div></div>
+              </div>
+              <span class="vmatrix__xlabel">Value to the customer &rarr;</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- T5 · Profile — quality on 100% -->
+        <div class="turn" data-turn="5">
+          <div class="q">How well did we serve our customers this week?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Quality held at 87, above the 85 target and scored on 100% of contacts, but it varies by channel and partner.</p>
+            <div class="app-mock__grid app-mock__grid--row4">
+              <div class="mmetric item"><span class="mmetric__label">Quality score</span><div class="mmetric__row"><span class="mmetric__val">87</span><span class="mmetric__delta mmetric__delta--up">+1</span></div><span class="mmetric__note">target 85</span></div>
+              <div class="mmetric item"><span class="mmetric__label">Defect-free contacts</span><div class="mmetric__row"><span class="mmetric__val">68%</span><span class="mmetric__delta mmetric__delta--up">+2pp</span></div><span class="mmetric__note">target 75</span></div>
+              <div class="mmetric item"><span class="mmetric__label">Fatal violations</span><div class="mmetric__row"><span class="mmetric__val">7</span><span class="mmetric__delta mmetric__delta--down">this week</span></div><span class="mmetric__note">auto-zero the audit</span></div>
+              <div class="mmetric item"><span class="mmetric__label">Human agreement</span><div class="mmetric__row"><span class="mmetric__val">91%</span><span class="mmetric__delta mmetric__delta--up">+3pp</span></div><span class="mmetric__note">AI vs ratified sample</span></div>
+            </div>
+            <div class="qmatrix item">
+              <div class="qmatrix__top">
+                <div class="qmatrix__title">Quality score &mdash; channel × partner</div>
+                <div class="qmatrix__link">By team and agent &mdash; open People &#8599;</div>
+              </div>
+              <div class="qtable">
+                <div class="qth qth--l">Channel</div><div class="qth">In-house</div><div class="qth">Partner MK</div><div class="qth">Partner NS</div><div class="qth">All</div>
+
+                <div class="qc qc--label">Voice <span class="qc__vol">4786</span></div>
+                <div class="qc"><span class="qc__v">92</span><span class="qc__n">2,234 contacts</span></div>
+                <div class="qc qc--bad"><span class="qc__v">80</span><span class="qc__n">1,595 contacts</span></div>
+                <div class="qc"><span class="qc__v">96</span><span class="qc__n">957 contacts</span></div>
+                <div class="qc"><span class="qc__v">89</span></div>
+
+                <div class="qc qc--label">Email <span class="qc__vol">1740</span></div>
+                <div class="qc"><span class="qc__v">88</span><span class="qc__n">774 contacts</span></div>
+                <div class="qc qc--bad"><span class="qc__v">78</span><span class="qc__n">967 contacts</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc qc--bad"><span class="qc__v">82</span></div>
+
+                <div class="qc qc--label">Chat <span class="qc__vol">1296</span></div>
+                <div class="qc"><span class="qc__v">87</span><span class="qc__n">290 contacts</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__v">87</span><span class="qc__n">1,006 contacts</span></div>
+                <div class="qc"><span class="qc__v">87</span></div>
+
+                <div class="qc qc--label">WhatsApp <span class="qc__vol">213</span></div>
+                <div class="qc"><span class="qc__v">90</span><span class="qc__n">213 contacts</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__v">90</span></div>
+
+                <div class="qc qc--label">Social <span class="qc__vol">58 · low n</span></div>
+                <div class="qc"><span class="qc__v">86</span><span class="qc__n">58 contacts</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__v">86</span></div>
+
+                <div class="qc qc--label">Field <span class="qc__vol">97</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__v">87</span><span class="qc__n">97 contacts</span></div>
+                <div class="qc"><span class="qc__dash">&mdash;</span></div>
+                <div class="qc"><span class="qc__v">87</span></div>
+
+                <div class="qc qc--label qc--sum">All channels <span class="qc__vol">8,190</span></div>
+                <div class="qc qc--sum"><span class="qc__v">90</span></div>
+                <div class="qc qc--sum qc--bad"><span class="qc__v">79</span></div>
+                <div class="qc qc--sum"><span class="qc__v">92</span></div>
+                <div class="qc qc--sum"><span class="qc__v">87</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T6 · Profile — performance quadrant (all work), native -->
+        <div class="turn" data-turn="6">
+          <div class="q">Who are our best associates, and who needs coaching?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Every agent placed on effectiveness × efficiency, built on 100% of their work, where 50 marks the program median.</p>
+            <div class="pq item">
+              <div class="pq-plot">
+                <div class="pq-plot__v"></div><div class="pq-plot__h"></div>
+                <span class="pq-corner pq-corner--tl">Anchors · 22%</span>
+                <span class="pq-corner pq-corner--tr">Stars · 31%</span>
+                <span class="pq-corner pq-corner--bl">Weak links · 22%</span>
+                <span class="pq-corner pq-corner--br">Sleepers · 24%</span>
+                <span class="pq-axis pq-axis--y">Efficiency &rarr;</span>
+                <span class="pq-axis pq-axis--x">Effectiveness &rarr;</span>
+                <span class="pq-dot" style="left:70%;top:24%"></span>
+                <span class="pq-dot" style="left:78%;top:32%"></span>
+                <span class="pq-dot" style="left:64%;top:34%"></span>
+                <span class="pq-dot" style="left:72%;top:42%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:32%;top:28%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:24%;top:38%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:38%;top:33%"></span>
+                <span class="pq-dot" style="left:70%;top:64%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:62%;top:70%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:78%;top:60%"></span>
+                <span class="pq-dot pq-dot--bad" style="left:28%;top:74%"></span>
+                <span class="pq-dot pq-dot--mid" style="left:38%;top:66%"></span>
+                <span class="pq-dot pq-dot--ring" style="left:31%;top:47%"><b>A. Fernandes</b></span>
+              </div>
+              <div class="pq-axes">
+                <div class="pq-axes__title">How the axes are built</div>
+                <div class="pq-axes__group">Effectiveness · 100 pts</div>
+                <div class="pq-row"><span>FCR &mdash; processed correctly</span><i style="width:60px"></i><b>35</b></div>
+                <div class="pq-row"><span>QA overall score</span><i style="width:51px"></i><b>30</b></div>
+                <div class="pq-row"><span>Snowball creation</span><i style="width:26px"></i><b>15</b></div>
+                <div class="pq-row"><span>Snowball melting</span><i style="width:17px"></i><b>10</b></div>
+                <div class="pq-row"><span>CES &mdash; customer effort</span><i style="width:17px"></i><b>10</b></div>
+                <div class="pq-axes__group">Efficiency · 100 pts</div>
+                <div class="pq-row"><span>AHT vs expected</span><i style="width:60px"></i><b>30</b></div>
+                <div class="pq-row"><span>% long calls</span><i style="width:60px"></i><b>30</b></div>
+                <div class="pq-row"><span>Transfer score</span><i style="width:40px"></i><b>20</b></div>
+                <div class="pq-row"><span>Short calls</span><i style="width:40px"></i><b>20</b></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T7 · Profile — scorecard -->
+        <div class="turn" data-turn="7">
+          <div class="q">Who needs coaching this week?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Three associates fall below the 85 target and need coaching this week.</p>
+            <div class="scorecard">
+              <div class="score-row item"><span class="score-ava">MR</span><span class="score-name">Maya R.</span><span class="score-track"><i class="score-fill" data-w="94%"></i></span><span class="score-val">94</span></div>
+              <div class="score-row item"><span class="score-ava">SL</span><span class="score-name">Sofia L.</span><span class="score-track"><i class="score-fill" data-w="91%"></i></span><span class="score-val">91</span></div>
+              <div class="score-row item"><span class="score-ava">PN</span><span class="score-name">Priya N.</span><span class="score-track"><i class="score-fill" data-w="90%"></i></span><span class="score-val">90</span></div>
+              <div class="score-row item"><span class="score-ava">DM</span><span class="score-name">Diego M.</span><span class="score-track"><i class="score-fill" data-w="88%"></i></span><span class="score-val">88</span></div>
+              <div class="score-row item"><span class="score-ava">HK</span><span class="score-name">Hana K.</span><span class="score-track"><i class="score-fill" data-w="86%"></i></span><span class="score-val">86</span></div>
+              <div class="score-row item"><span class="score-ava">OT</span><span class="score-name">Owen T.</span><span class="score-track"><i class="score-fill" data-w="85%"></i></span><span class="score-val">85</span></div>
+              <div class="score-row item"><span class="score-ava">DP</span><span class="score-name">Devan P.</span><span class="score-track"><i class="score-fill warn" data-w="82%"></i></span><span class="score-val">82</span></div>
+              <div class="score-row item"><span class="score-ava">MB</span><span class="score-name">Marco B.</span><span class="score-track"><i class="score-fill warn" data-w="81%"></i></span><span class="score-val">81</span></div>
+              <div class="score-row item"><span class="score-ava">AK</span><span class="score-name">Aaron K.</span><span class="score-track"><i class="score-fill warn" data-w="79%"></i></span><span class="score-val">79</span></div>
+              <div class="score-row item"><span class="score-ava" style="background:#eef0ee;color:#6b7280;">TA</span><span class="score-name" style="color:#6b7280;">Team average</span><span class="score-track"><i class="score-fill" data-w="87%"></i></span><span class="score-val">87</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T8 · FIT — channel-to-intent fit (native) -->
+        <div class="turn" data-turn="8">
+          <div class="q">Which channel is the best fit for each intent?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">A single fit score per channel, blending resolution, experience, and cost by your weights. The best channel per intent updates live.</p>
+            <div class="cfit-weights item">
+              <div class="cfit-w"><div class="cfit-w__top"><span>Resolution</span><span class="cfit-w__v" data-count="45">0%</span></div><div class="cfit-w__track"><i class="cfit-w__fill" data-w="45%"></i></div></div>
+              <div class="cfit-w"><div class="cfit-w__top"><span>Experience · CES</span><span class="cfit-w__v" data-count="38">0%</span></div><div class="cfit-w__track"><i class="cfit-w__fill" data-w="38%"></i></div></div>
+              <div class="cfit-w"><div class="cfit-w__top"><span>Cost per resolved</span><span class="cfit-w__v" data-count="17">0%</span></div><div class="cfit-w__track"><i class="cfit-w__fill" data-w="17%"></i></div></div>
+            </div>
+            <div class="cfit item">
+              <div class="cfit__th cfit__th--l">Intent</div><div class="cfit__th">Voice</div><div class="cfit__th">Email</div><div class="cfit__th">Chat</div><div class="cfit__th">WhatsApp</div><div class="cfit__th">Journeys</div>
+
+              <div class="fc fc--l">Get a delivery update <span class="fc__fcr">FCR 58%</span></div>
+              <div class="fc"><span class="fc__v">67</span><span class="fc__n">415</span></div><div class="fc"><span class="fc__v">39</span><span class="fc__n">351</span></div><div class="fc"><span class="fc__v">72</span><span class="fc__n">99</span></div><div class="fc fc--best"><span class="fc__v">85</span><span class="fc__n">117</span></div><div class="fc fc--j">1,472</div>
+
+              <div class="fc fc--l">Get a refund <span class="fc__fcr">FCR 79%</span></div>
+              <div class="fc"><span class="fc__v">81</span><span class="fc__n">234</span></div><div class="fc"><span class="fc__v">67</span><span class="fc__n">106</span></div><div class="fc fc--best"><span class="fc__v">86</span><span class="fc__n">133</span></div><div class="fc"><span class="fc__dash">&mdash;</span></div><div class="fc fc--j">513</div>
+
+              <div class="fc fc--l">Cancel my order <span class="fc__fcr">FCR 71%</span></div>
+              <div class="fc"><span class="fc__v">73</span><span class="fc__n">246</span></div><div class="fc"><span class="fc__dash">&mdash;</span></div><div class="fc"><span class="fc__v">76</span><span class="fc__n">161</span></div><div class="fc fc--best"><span class="fc__v">79</span><span class="fc__n">76</span></div><div class="fc fc--j">475</div>
+
+              <div class="fc fc--l">Find my order <span class="fc__fcr">FCR 65%</span></div>
+              <div class="fc"><span class="fc__v">69</span><span class="fc__n">218</span></div><div class="fc"><span class="fc__v">59</span><span class="fc__n">133</span></div><div class="fc fc--best"><span class="fc__v">76</span><span class="fc__n">111</span></div><div class="fc"><span class="fc__dash">&mdash;</span></div><div class="fc fc--j">462</div>
+
+              <div class="fc fc--l">Check product availability <span class="fc__fcr">FCR 88%</span></div>
+              <div class="fc"><span class="fc__v">78</span><span class="fc__n">117</span></div><div class="fc"><span class="fc__dash">&mdash;</span></div><div class="fc"><span class="fc__v">89</span><span class="fc__n">133</span></div><div class="fc fc--best"><span class="fc__v">90</span><span class="fc__n">75</span></div><div class="fc fc--j">328</div>
+
+              <div class="fc fc--l">Get product information <span class="fc__fcr">FCR 90%</span></div>
+              <div class="fc"><span class="fc__v">80</span><span class="fc__n">101</span></div><div class="fc"><span class="fc__dash">&mdash;</span></div><div class="fc"><span class="fc__v">90</span><span class="fc__n">117</span></div><div class="fc fc--best"><span class="fc__v">92</span><span class="fc__n">75</span></div><div class="fc fc--j">296</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- T9 · FIT — best-fit associate heatmap -->
+        <div class="turn" data-turn="9">
+          <div class="q">And the best associate for each intent?</div>
+          <div class="typing"><span class="typing__i">i</span><div class="typing__dots"><span></span><span></span><span></span></div></div>
+          <div class="a">
+            <p class="a__summary item">Fit of every associate to every intent. The best match is outlined.</p>
+            <div class="heat item">
+              <div class="heat__h"></div><div class="heat__h">Maya R.</div><div class="heat__h">Sofia L.</div><div class="heat__h">Devan P.</div><div class="heat__h">Aaron K.</div>
+              <div class="heat__rl">Complex complaint</div>
+              <div class="heat__cell best" style="background:rgba(27,234,135,.92)">92</div><div class="heat__cell" style="background:rgba(27,234,135,.55)">71</div><div class="heat__cell" style="background:rgba(27,234,135,.30)">48</div><div class="heat__cell" style="background:rgba(27,234,135,.24)">41</div>
+              <div class="heat__rl">Refund dispute</div>
+              <div class="heat__cell" style="background:rgba(27,234,135,.58)">74</div><div class="heat__cell best" style="background:rgba(27,234,135,.88)">89</div><div class="heat__cell" style="background:rgba(27,234,135,.40)">57</div><div class="heat__cell" style="background:rgba(27,234,135,.34)">51</div>
+              <div class="heat__rl">Delivery escalation</div>
+              <div class="heat__cell" style="background:rgba(27,234,135,.46)">63</div><div class="heat__cell" style="background:rgba(27,234,135,.42)">59</div><div class="heat__cell best" style="background:rgba(27,234,135,.86)">87</div><div class="heat__cell" style="background:rgba(27,234,135,.36)">53</div>
+              <div class="heat__rl">Retention save</div>
+              <div class="heat__cell best" style="background:rgba(27,234,135,.90)">90</div><div class="heat__cell" style="background:rgba(27,234,135,.50)">66</div><div class="heat__cell" style="background:rgba(27,234,135,.30)">47</div><div class="heat__cell" style="background:rgba(27,234,135,.26)">44</div>
+              <div class="heat__rl">Cancel &amp; refund</div>
+              <div class="heat__cell" style="background:rgba(27,234,135,.44)">61</div><div class="heat__cell best" style="background:rgba(27,234,135,.84)">85</div><div class="heat__cell" style="background:rgba(27,234,135,.34)">52</div><div class="heat__cell" style="background:rgba(27,234,135,.30)">48</div>
+              <div class="heat__rl">Late delivery / WISMO</div>
+              <div class="heat__cell" style="background:rgba(27,234,135,.40)">58</div><div class="heat__cell" style="background:rgba(27,234,135,.38)">56</div><div class="heat__cell best" style="background:rgba(27,234,135,.82)">84</div><div class="heat__cell" style="background:rgba(27,234,135,.44)">61</div>
+            </div>
+            <div class="heat__legend">fit score 0–100 · higher is a better match</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="mscene" data-mturn="m7"><video class="mvid" src="assets/video/profile-quadrant.mp4?v=2" muted playsinline preload="auto"></video></div>
+    <div class="mscene" data-mturn="m9"><video class="mvid" src="assets/video/fit-heatmap.mp4?v=1" muted playsinline preload="auto"></video></div>
+
+    <!-- Branded statement cards -->
+    <div class="card-scene" data-card="c1">
+      <svg class="card-squiggle" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice"><path d="M-40 250 C 260 60, 520 60, 640 300 C 740 500, 470 640, 380 470 C 300 320, 620 250, 980 420 C 1220 530, 1180 210, 1360 170 C 1520 135, 1620 320, 1660 520" stroke="#0b8a4e" stroke-width="9" stroke-linecap="round" opacity="0.28"/></svg>
+      <div class="card-text">The customer behavior<br><em>intelligence</em> platform.</div>
+    </div>
+    <div class="card-scene" data-card="c2">
+      <svg class="card-squiggle" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice"><path d="M-40 620 C 240 780, 520 760, 660 540 C 770 360, 500 220, 400 400 C 320 545, 660 640, 1000 470 C 1240 350, 1180 660, 1360 700 C 1520 735, 1620 540, 1660 360" stroke="#0b8a4e" stroke-width="9" stroke-linecap="round" opacity="0.28"/></svg>
+      <div class="card-text">Not another dashboard.<br><span style="color:#4ff0a6;">Intendra</span> shows you what to do, and how to do it.</div>
+    </div>
+    <div class="card-scene" data-card="c3">
+      <svg class="card-squiggle" viewBox="0 0 1600 900" fill="none" preserveAspectRatio="xMidYMid slice"><path d="M-40 250 C 260 60, 520 60, 640 300 C 740 500, 470 640, 380 470 C 300 320, 620 250, 980 420 C 1220 530, 1180 210, 1360 170 C 1520 135, 1620 320, 1660 520" stroke="#0b8a4e" stroke-width="9" stroke-linecap="round" opacity="0.28"/></svg>
+      <div class="card-text">The best fit,<br><em>intent to channel.</em></div>
+    </div>
+    <div class="card-scene" data-card="c4">
+      <div class="card-text">The right action,<br>to the right <em>person.</em></div>
+    </div>
+    <div class="card-scene" data-card="c5">
+      <div class="card-text">QA on <em>100%</em><br>of your interactions.</div>
+    </div>
+
+    <div class="caption"></div>
+
+    <div class="outro">
+      <p>Every word. Every move. <span class="grad">Every silence.</span></p>
+      <p style="font-size:30px; font-weight:700;">Turned into <span class="grad">action.</span></p>
+      <img class="outro__brand" src="assets/logos/wordmark/intendra-wordmark-green.png" alt="Intendra AI" />
+    </div>
+  </div>
+
+  <script>
+    const sleep = (ms) => new Promise(r => setTimeout(r, ms));
+
+    // build the drifting Brilliant Green / Stone corner-blocks (from the design's seeds)
+    (function buildBlocks() {
+      const wrap = document.querySelector('.frame__blocks'); if (!wrap) return;
+      const seeds = [[37,150,87,.10,34,0],[77,583,60,.16,40,2.1],[1503,267,80,.12,38,1.2],[1540,633,47,.20,30,3.4],[467,28,43,.14,32,4.0],[1033,845,70,.10,44,1.6],[617,858,40,.18,28,2.8],[1183,25,53,.12,36,5.0]];
+      const corners = ['0 22% 0 0','22% 0 0 0','0 0 22% 0','0 0 0 22%'];
+      seeds.forEach(([x,y,s,a,dur,delay],i) => {
+        const d = document.createElement('div');
+        const rgb = (i % 3 !== 2) ? '27,234,135' : '224,224,224';
+        d.style.cssText = 'position:absolute;left:'+x+'px;top:'+y+'px;width:'+s+'px;height:'+s+'px;border-radius:'+corners[i%4]+';background:rgba('+rgb+','+a+');animation:bg-drift '+dur+'s linear '+(-delay)+'s infinite alternate;';
+        wrap.appendChild(d);
+      });
+    })();
+
+    const turns = [...document.querySelectorAll('.turn')];
+    const caption = document.querySelector('.caption');
+    const outro = document.querySelector('.outro');
+    const login = document.querySelector('[data-el="login"]');
+    const emailTxt = login.querySelector('.login__txt');
+    const caret = login.querySelector('.login__caret');
+    const pwField = login.querySelector('[data-el="pw"]');
+    const signin = login.querySelector('[data-el="signin"]');
+    const win = document.querySelector('.win');
+    const mscenes = [...document.querySelectorAll('.mscene')];
+    const cardScenes = [...document.querySelectorAll('.card-scene')];
+    const order = [
+      ['card', 'c1', ''],
+      ['turn', '1', 'Pulse · every intent, tagged and costed'],
+      ['turn', '2', 'Pulse · the week in numbers'],
+      ['card', 'c2', ''],
+      ['turn', '3', 'Compass · the #1 fix, ranked by impact'],
+      ['turn', '4', 'Compass · every intent placed by value'],
+      ['card', 'c5', ''],
+      ['turn', '5', 'Profile · quality on 100% of contacts'],
+      ['turn', '6', 'Profile · all work, one performance map'],
+      ['turn', '7', 'Profile · coach the whole team'],
+      ['card', 'c3', ''],
+      ['turn', '8', 'FIT · channel-to-intent fit, weighted live'],
+      ['card', 'c4', ''],
+      ['turn', '9', 'FIT · best-fit associate for every intent'],
+    ];
+
+    function resetTurn(t) {
+      t.classList.remove('active');
+      const q = t.querySelector('.q'); if (q) q.classList.remove('show');
+      const typing = t.querySelector('.typing');
+      if (typing) { typing.classList.remove('show'); typing.hidden = false; }
+      const a = t.querySelector('.a'); if (a) a.classList.remove('show');
+      t.querySelectorAll('.item').forEach(i => i.classList.remove('show'));
+      t.querySelectorAll('[data-w]').forEach(b => b.style.width = '0');
+      const sl = t.querySelector('[data-scroll]'); if (sl) { sl.style.transition = 'none'; sl.style.transform = 'translateY(0)'; }
+      t.querySelectorAll('.fitv, .cfit-w__v').forEach(v => v.textContent = '0%');
+      t.querySelectorAll('.quad, .vquad').forEach(q => q.classList.remove('zoom'));
+      const qg = t.querySelector('.quad-grid, .vmatrix__grid'); if (qg) qg.classList.remove('zooming');
+    }
+    function resetLogin() { login.classList.remove('gone'); emailTxt.textContent = ''; caret.style.display = ''; pwField.classList.remove('show'); signin.classList.remove('press'); }
+    function resetMedia() { win.classList.remove('dim'); mscenes.forEach(m => { m.classList.remove('show'); const v = m.querySelector('video'); try { v.pause(); v.currentTime = 0; } catch (e) {} }); }
+    function resetCards() { cardScenes.forEach(c => c.classList.remove('show')); }
+    function resetAll() { turns.forEach(resetTurn); caption.classList.remove('show'); outro.classList.remove('show'); resetLogin(); resetMedia(); resetCards(); }
+    function setCaption(text) { caption.classList.remove('show'); setTimeout(() => { caption.textContent = text; caption.classList.add('show'); }, 160); }
+
+    function countUp(el, to, dur) {
+      const start = performance.now();
+      function step(now) {
+        const p = Math.min(1, (now - start) / dur);
+        const e = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(e * to) + '%';
+        if (p < 1) requestAnimationFrame(step);
+      }
+      requestAnimationFrame(step);
+    }
+
+    // per-scene extra animation
+    const hooks = {
+      '1': async (t) => {           // start on Volume, switch to Cost (bars + list numbers), then scroll
+        const btns = [...t.querySelectorAll('.demand-toggle__btn')];
+        const cost = t.querySelector('.demand-view--cost');
+        const vol = t.querySelector('.demand-view--volume');
+        const acts = [...t.querySelectorAll('.act-val')];
+        const setMetric = (m) => {
+          btns.forEach(b => b.classList.toggle('is-active', b.dataset.metric === m));
+          cost.classList.toggle('is-active', m === 'cost');
+          vol.classList.toggle('is-active', m === 'volume');
+          acts.forEach(a => { a.textContent = (m === 'cost') ? a.dataset.cost : a.dataset.vol; });
+        };
+        setMetric('volume');        // start on Volume
+        await sleep(1200);          // hold on Volume
+        setMetric('cost');          // switch -> Cost (buttons, bars, and list numbers change)
+        await sleep(1200);
+        const sl = t.querySelector('[data-scroll]');
+        const clip = t.querySelector('.scroll-clip');
+        const dist = sl.scrollHeight - clip.clientHeight;
+        sl.style.transition = 'transform 1.6s ease-in-out';
+        sl.style.transform = 'translateY(-' + dist + 'px)';
+        await sleep(1600);
+      },
+      '4': async (t) => {           // zoom each value-irritant quadrant one at a time
+        const grid = t.querySelector('.vmatrix__grid');
+        const quads = [...t.querySelectorAll('.vquad')];
+        grid.classList.add('zooming');
+        for (const q of quads) { q.classList.add('zoom'); await sleep(800); q.classList.remove('zoom'); await sleep(140); }
+        grid.classList.remove('zooming');
+        await sleep(150);
+      },
+      '8': async (t) => {           // move the weight sliders; recompute the fit table live
+        const wEls = [...t.querySelectorAll('.cfit-w')].map(w => ({ fill: w.querySelector('.cfit-w__fill'), val: w.querySelector('.cfit-w__v') }));
+        wEls.forEach(w => { w.fill.style.transition = 'none'; });
+        const arch = [[3, 0, -8], [-4, -8, 12], [2, 4, 0], [1, 6, -4]]; // [dRes,dExp,dCost] per channel column
+        const rows = [...t.querySelectorAll('.cfit .fc--l')].map(lbl => {
+          const cells = []; let el = lbl.nextElementSibling;
+          for (let i = 0; i < 4; i++) { cells.push(el); el = el.nextElementSibling; }
+          return cells;
+        });
+        rows.forEach(cells => cells.forEach((c, i) => {
+          const v = c.querySelector('.fc__v'); if (!v) return;
+          const base = +v.textContent, a = arch[i];
+          c.dataset.r = Math.max(0, Math.min(100, base + a[0]));
+          c.dataset.e = Math.max(0, Math.min(100, base + a[1]));
+          c.dataset.c = Math.max(0, Math.min(100, base + a[2]));
+        }));
+        const setW = (res, exp, cost) => {
+          const wR = res / 100, wE = exp / 100, wC = cost / 100;
+          wEls[0].fill.style.width = res + '%'; wEls[0].val.textContent = Math.round(res) + '%';
+          wEls[1].fill.style.width = exp + '%'; wEls[1].val.textContent = Math.round(exp) + '%';
+          wEls[2].fill.style.width = cost + '%'; wEls[2].val.textContent = Math.round(cost) + '%';
+          rows.forEach(cells => {
+            let best = -1, bestEl = null;
+            cells.forEach(c => {
+              if (c.dataset.r === undefined) return;
+              const val = Math.round(wR * c.dataset.r + wE * c.dataset.e + wC * c.dataset.c);
+              c.querySelector('.fc__v').textContent = val;
+              if (val > best) { best = val; bestEl = c; }
+            });
+            cells.forEach(c => c.classList.remove('fc--best'));
+            if (bestEl) bestEl.classList.add('fc--best');
+          });
+        };
+        let cur = { res: 45, exp: 38, cost: 17 };
+        setW(cur.res, cur.exp, cur.cost);
+        const tween = (res, exp, cost, dur) => new Promise(done => {
+          const s = [cur.res, cur.exp, cur.cost], e = [res, exp, cost], t0 = performance.now();
+          const step = (now) => {
+            const p = Math.min(1, (now - t0) / dur), k = 1 - Math.pow(1 - p, 3);
+            setW(s[0] + (e[0] - s[0]) * k, s[1] + (e[1] - s[1]) * k, s[2] + (e[2] - s[2]) * k);
+            if (p < 1) requestAnimationFrame(step); else { cur = { res, exp, cost }; done(); }
+          };
+          requestAnimationFrame(step);
+        });
+        await sleep(500);
+        await tween(24, 26, 50, 900);    // cost-focused
+        await sleep(350);
+        await tween(62, 28, 10, 900);    // resolution-focused
+        await sleep(350);
+        await tween(45, 38, 17, 800);    // back to default
+        wEls.forEach(w => { w.fill.style.transition = ''; });
+      },
+    };
+
+    async function playLogin() {
+      await sleep(300);
+      for (let i = 0; i < 16; i++) { emailTxt.textContent += '•'; await sleep(30); }
+      await sleep(280);
+      caret.style.display = 'none';
+      pwField.classList.add('show');
+      await sleep(650);
+      signin.classList.add('press');
+      await sleep(180);
+      signin.classList.remove('press');
+      await sleep(420);
+      win.classList.add('dim');      // hide the white Ask-Intendra card so it doesn't flash
+      login.classList.add('gone');   // fade sign-in out -> reveals the obsidian frame
+      await sleep(750);
+    }
+
+    async function playCard(el) {
+      win.classList.add('dim');
+      caption.classList.remove('show');
+      el.classList.add('show');
+      await sleep(2700);
+      el.classList.remove('show');
+      await sleep(650);
+    }
+
+    async function playMedia(el, cap, q, product) {
+      if (q) {
+        // ask the question in the window first, then reveal the clip as the answer
+        win.classList.remove('dim');
+        const plabel = document.querySelector('[data-el="product"]');
+        if (plabel) plabel.textContent = product || '';
+        const mq = document.querySelector('.turn[data-turn="mq"]');
+        turns.forEach(x => x.classList.remove('active'));
+        mq.classList.add('active');
+        mq.querySelector('.q').textContent = q;
+        mq.querySelector('.q').classList.add('show');
+        await sleep(1050);
+        const mqt = mq.querySelector('.typing');
+        mqt.classList.add('show');
+        await sleep(1300);
+        mqt.classList.remove('show'); mqt.hidden = true;
+        mq.classList.remove('active');
+        mq.querySelector('.q').classList.remove('show');
+        mqt.hidden = false;
+      }
+      win.classList.add('dim');
+      setCaption(cap);
+      const vid = el.querySelector('video');
+      try { vid.currentTime = 0; } catch (e) {}
+      el.classList.add('show');
+      await sleep(350);
+      try { await vid.play(); } catch (e) {}
+      await new Promise((res) => {
+        let done = false;
+        const finish = () => { if (!done) { done = true; res(); } };
+        vid.onended = finish;
+        const d = (vid.duration && isFinite(vid.duration)) ? vid.duration * 1000 : 16000;
+        setTimeout(finish, d + 2500);
+      });
+      await sleep(500);
+      el.classList.remove('show');
+      await sleep(500);
+      win.classList.remove('dim');
+    }
+
+    const PRODUCT = { '1': 'Pulse', '2': 'Pulse', '3': 'Compass', '4': 'Compass', '5': 'Profile', '6': 'Profile', '7': 'Profile', '8': 'FIT', '9': 'FIT' };
+    const TURN_TARGET = 8600;   // every product view stays on screen this long
+    async function playTurn(t, cap) {
+      const t0 = performance.now();
+      win.classList.remove('dim');
+      const plabel = document.querySelector('[data-el="product"]');
+      if (plabel) plabel.textContent = PRODUCT[t.dataset.turn] || '';
+      turns.forEach(x => x.classList.remove('active'));
+      t.classList.add('active');
+      setCaption(cap);
+      await sleep(160);
+      t.querySelector('.q').classList.add('show');
+      await sleep(1050);
+      const typing = t.querySelector('.typing');
+      typing.classList.add('show');
+      await sleep(1250);
+      typing.classList.remove('show'); typing.hidden = true;
+      t.querySelector('.a').classList.add('show');
+      await sleep(380);
+      for (const it of t.querySelectorAll('.item')) {
+        it.classList.add('show');
+        it.querySelectorAll('[data-w]').forEach(b => b.style.width = b.dataset.w);
+        await sleep(280);
+      }
+      const hook = hooks[t.dataset.turn];
+      if (hook) await hook(t);
+      const elapsed = performance.now() - t0;
+      await sleep(Math.max(700, TURN_TARGET - elapsed));   // pad to a consistent on-screen time
+    }
+
+    let LOOP = true;
+    async function run() {
+      resetAll();
+      if (document.fonts && document.fonts.ready) { try { await document.fonts.ready; } catch (e) {} }
+      await sleep(600);
+      await playLogin();
+      const MEDIA_Q = {
+        'm7': ['Who are our best associates, and who needs coaching?', 'Profile'],
+        'm9': ['How does each intent route to the best channel?', 'FIT'],
+      };
+      for (const [kind, id, cap] of order) {
+        if (kind === 'turn') await playTurn(document.querySelector('.turn[data-turn="' + id + '"]'), cap);
+        else if (kind === 'media') { const mq = MEDIA_Q[id] || []; await playMedia(document.querySelector('.mscene[data-mturn="' + id + '"]'), cap, mq[0], mq[1]); }
+        else await playCard(document.querySelector('.card-scene[data-card="' + id + '"]'));
+      }
+      caption.classList.remove('show');
+      outro.classList.add('show');
+      await sleep(3200);
+      turns.forEach(resetTurn); resetLogin();
+      await sleep(150);
+      outro.classList.remove('show');
+      await sleep(1000);
+      window.__loopCount = (window.__loopCount || 0) + 1;
+      if (LOOP) run(); else window.__done = true;
+    }
+
+    window.startOnce = () => { LOOP = false; window.__done = false; run(); };
+    window.__captureReady = true;
+    if (!location.search.includes('norun')) run();
+  </script>
+</body>
+</html>
