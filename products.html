@@ -4,11 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Products — Intendra AI</title>
-  <meta name="description" content="Five products, one engine, one question each. Pulse, Compass, Reveal, Fit, and Profile — plus Ask Intendra — read 100% of customer and agent behavior and turn it into owned, costed action." />
+  <meta name="description" content="Five products, one engine. Pulse, Compass, Reveal, Fit, and Profile — plus Ask Intendra — read 100% of customer and agent behavior and turn it into owned, costed action." />
   <link rel="icon" href="assets/logos/favicon/favicon-32x32.png" />
   <link rel="stylesheet" href="css/variables.css?v=38" />
   <link rel="stylesheet" href="css/base.css?v=38" />
-  <link rel="stylesheet" href="css/layout.css?v=84" />
+  <link rel="stylesheet" href="css/layout.css?v=94" />
   <link rel="stylesheet" href="css/components.css?v=38" />
   <link rel="stylesheet" href="css/animations.css?v=38" />
 </head>
@@ -23,7 +23,6 @@
         <ul class="nav__list">
           <li><a href="platform.html">Platform</a></li>
           <li><a href="products.html" aria-current="page">Products</a></li>
-          <li><a href="solutions.html">Solutions</a></li>
           <li><a href="about.html">About</a></li>
           <li class="nav__has-sub">
             <a href="resources.html">Resources</a>
@@ -45,244 +44,245 @@
 
     <!-- Hero -->
     <section class="section--light platform-hero">
-      <div class="container reveal" style="text-align:center; max-width: 780px;">
+      <div class="container reveal" style="text-align:center; max-width: 800px;">
         <p class="eyebrow" style="justify-content:center;">Products</p>
-        <h1>Five products. One engine.<br>One question each.</h1>
-        <p style="max-width: 600px; margin: var(--space-4) auto 0; font-size: var(--text-body-l);">Just the question you walked in with. This is <strong>Voice of Data</strong> — the 100%, including the 92% who never say a word.</p>
-        <ul class="prod-nav reveal">
-          <li><a href="#pulse">Pulse</a></li>
-          <li><a href="#compass">Compass</a></li>
-          <li><a href="#reveal">Reveal</a></li>
-          <li><a href="#fit">Fit</a></li>
-          <li><a href="#profile">Profile</a></li>
-          <li><a href="#ask">Ask Intendra</a></li>
-        </ul>
+        <h1>Five products.<br>One engine.</h1>
+        <p style="max-width: 620px; margin: var(--space-4) auto 0; font-size: var(--text-body-l);">One engine, five products — fix the cause, route the contact, coach the team, keep the customer.</p>
+      </div>
+    </section>
+
+    <!-- One engine -->
+    <section class="section--canvas prod-engine">
+      <div class="container">
+        <p class="eyebrow reveal" style="justify-content:center;">One engine</p>
+        <h2 class="reveal" style="text-align:center; max-width: 560px; margin: 0 auto var(--space-10);">Five lenses on the same intelligence.</h2>
+        <div class="engine-stage reveal">
+          <div class="engine" role="group" aria-label="Five products powered by one engine">
+          <svg class="engine__wires" viewBox="0 0 900 460" preserveAspectRatio="none" aria-hidden="true">
+            <path id="ew1" class="engine__wire" d="M450 230 L162 120" />
+            <path id="ew2" class="engine__wire" d="M450 230 L450 58" />
+            <path id="ew3" class="engine__wire" d="M450 230 L738 120" />
+            <path id="ew4" class="engine__wire" d="M450 230 L684 342" />
+            <path id="ew5" class="engine__wire" d="M450 230 L216 342" />
+            <circle class="engine__spark" r="4"><animateMotion dur="1.7s" repeatCount="indefinite"><mpath href="#ew1" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.7s" begin="-0.85s" repeatCount="indefinite"><mpath href="#ew1" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.5s" begin="-0.3s" repeatCount="indefinite"><mpath href="#ew2" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.5s" begin="-1.05s" repeatCount="indefinite"><mpath href="#ew2" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.8s" begin="-0.6s" repeatCount="indefinite"><mpath href="#ew3" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.8s" begin="-1.5s" repeatCount="indefinite"><mpath href="#ew3" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.9s" begin="-0.4s" repeatCount="indefinite"><mpath href="#ew4" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.9s" begin="-1.35s" repeatCount="indefinite"><mpath href="#ew4" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.6s" begin="-0.9s" repeatCount="indefinite"><mpath href="#ew5" /></animateMotion></circle>
+            <circle class="engine__spark" r="4"><animateMotion dur="1.6s" begin="-0.15s" repeatCount="indefinite"><mpath href="#ew5" /></animateMotion></circle>
+          </svg>
+          <div class="engine__core" aria-hidden="true">
+            <span class="engine__core-ring"></span>
+            <span class="engine__core-i">i</span>
+            <span class="engine__core-label">One model</span>
+          </div>
+          <a class="engine__node" style="left:18%; top:26%;" href="#pulse"><img src="assets/icons/Product_Pulse.png" alt="" width="34" height="34" /><span>Pulse</span></a>
+          <a class="engine__node" style="left:50%; top:12%;" href="#compass"><img src="assets/icons/Product_Compass.png" alt="" width="34" height="34" /><span>Compass</span></a>
+          <a class="engine__node" style="left:82%; top:26%;" href="#fit"><img src="assets/icons/product-fit-512-transparent.png" alt="" width="34" height="34" /><span>Fit</span></a>
+          <a class="engine__node" style="left:76%; top:74%;" href="#profile"><img src="assets/icons/Product_Profile.png" alt="" width="34" height="34" /><span>Profile</span></a>
+          <a class="engine__node" style="left:24%; top:74%;" href="#reveal"><img src="assets/icons/Product_Reveal.png" alt="" width="34" height="34" /><span>Reveal</span></a>
+          </div>
+        </div>
+        <div class="engine__foot reveal">
+          <a href="#ask" class="engine__ask">Or just ask — <strong>Ask Intendra</strong> <span aria-hidden="true">→</span></a>
+        </div>
       </div>
     </section>
 
     <!-- Pulse -->
-    <section id="pulse" class="section--canvas prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <img class="prod__icon" src="assets/icons/Product_Pulse.png" alt="" width="64" height="64" />
-          <h2 class="prod__q">Why did customers contact us, and what did it cost?</h2>
-          <span class="prod__name">Pulse™</span>
-          <p class="prod__answer">Every interaction classified against a proprietary intent library, with cost and effort attached. 100% coverage, &gt;97% accuracy.</p>
+    <section id="pulse" class="section--light prod-show">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__eyebrow"><img src="assets/icons/Product_Pulse.png" alt="" width="28" height="28" />Pulse™</span>
+          <h2 class="prod-show__q">Why they contacted you, and what it cost.</h2>
+          <p class="prod-show__answer">Every interaction classified against a proprietary intent library, with handling and downstream cost attached. 100% coverage, &gt;97% accuracy.</p>
+          <ul class="prod-show__does">
+            <li>A verb on every contact — <em>cancel, refund, expedite</em></li>
+            <li>Reasons for contact in your customers' own words — not just internal codes</li>
+            <li>The trigger behind it, and what it costs to serve</li>
+            <li>The metrics that matter on every interaction — customer effort <em>(CES)</em>, first-contact resolution <em>(FCR)</em>, repeats and transfers</li>
+            <li>Emotion scored through our emotion framework — how the customer felt, and the moment the interaction turned</li>
+          </ul>
         </div>
-        <div class="prod__example reveal">
-          <span class="prod__example-label">Example</span>
-          <p>49 agents, 8,500 contacts a week, FCR stuck at 68%. Pulse surfaced $11K a week in contacts that shouldn't exist — most of them digitisable.</p>
-        </div>
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Replaces</h3>
-              <p>Disposition codes nobody trusts, 1–3% QA sampling, single-digit survey response.</p>
-            </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Intent on every interaction — a verb: cancel, refund, expedite</li>
-                <li>The trigger behind it, and its handling and downstream cost</li>
-                <li>Customer effort, per interaction</li>
-                <li>100% QA scoring — no sampling</li>
-              </ul>
-            </div>
+        <div class="prod-show__visual reveal">
+          <div class="pv-tag" aria-hidden="true">
+            <span class="pv-label">Reasons for contact, in your customers' words</span>
+            <div class="pv-tag__row"><span class="pv-tag__txt">“I was charged twice”</span><span class="pv-tag__intent">refund</span><span class="pv-tag__cost">$14</span></div>
+            <div class="pv-tag__row"><span class="pv-tag__txt">“My order never arrived”</span><span class="pv-tag__intent">track-order</span><span class="pv-tag__cost">$5</span></div>
+            <div class="pv-tag__row"><span class="pv-tag__txt">“I can't log into my account”</span><span class="pv-tag__intent">access-issue</span><span class="pv-tag__cost">$9</span></div>
+            <div class="pv-tag__row"><span class="pv-tag__txt">“Nobody got back to me”</span><span class="pv-tag__intent">follow-up</span><span class="pv-tag__cost">$18</span></div>
+            <div class="pv-tag__row"><span class="pv-tag__txt">“How do I cancel?”</span><span class="pv-tag__intent">cancel</span><span class="pv-tag__cost">$22</span></div>
+            <div class="pv-tag__foot">Every contact classified · &gt;97% accuracy</div>
           </div>
-        </details>
-        <p class="prod__handoff reveal">Hands off to <a href="#compass">Compass ↓</a></p>
+        </div>
       </div>
     </section>
 
     <!-- Compass -->
-    <section id="compass" class="section--light prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <img class="prod__icon" src="assets/icons/Product_Compass.png" alt="" width="64" height="64" />
-          <h2 class="prod__q">What would make it stop, and who owns that?</h2>
-          <span class="prod__name">Compass™</span>
-          <p class="prod__answer">Root cause attributed, the action priced, and the owner assigned — the function that controls the lever.</p>
+    <section id="compass" class="section--canvas prod-show prod-show--flip">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__eyebrow"><img src="assets/icons/Product_Compass.png" alt="" width="28" height="28" />Compass™</span>
+          <h2 class="prod-show__q">What to do, who owns it, and what it's worth.</h2>
+          <p class="prod-show__answer">Compass prescribes the action — with the cause behind it, a price on it, and the owner who actually controls the lever.</p>
+          <ul class="prod-show__does">
+            <li>The prescribed action — <em>eliminate, digitise, simplify, leverage, preempt</em></li>
+            <li>Not a recommendation to “investigate” — the specific thing to do</li>
+            <li>The root cause behind it — <em>people, process, policy, or external</em></li>
+            <li>An owner assigned, with a baseline and a target</li>
+            <li>What it's worth a year, with the working shown</li>
+          </ul>
         </div>
-        <div class="prod__example reveal">
-          <span class="prod__example-label">Example</span>
-          <p>Compass traced 61% of billing disputes to one delayed-refund policy — roughly $553K a year, owned by Billing.</p>
-        </div>
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Replaces</h3>
-              <p>The quarterly deep-dive, and prioritisation by volume or by whoever argues loudest.</p>
-            </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Root cause: people, process, policy, or external</li>
-                <li>Value-Irritant placement, to the customer and the company</li>
-                <li>Prescribed action — eliminate, digitise, simplify, leverage, preempt — priced</li>
-                <li>Owner assigned, with a baseline and a target</li>
-              </ul>
-            </div>
+        <div class="prod-show__visual reveal">
+          <div class="pv-flow" aria-hidden="true">
+            <span class="pv-label">What to do, and what it's worth</span>
+            <div class="pv-flow__step"><span class="pv-flow__k">Root cause</span><span class="pv-flow__v">Delayed-refund policy</span></div>
+            <span class="pv-flow__link"></span>
+            <div class="pv-flow__step"><span class="pv-flow__k">Prescribed</span><span class="pv-flow__v">Auto-refund inside 48h</span></div>
+            <span class="pv-flow__link"></span>
+            <div class="pv-flow__step"><span class="pv-flow__k">Owner</span><span class="pv-flow__v">Billing</span></div>
+            <div class="pv-flow__value"><span>Worth</span>$553K / yr</div>
           </div>
-        </details>
-        <p class="prod__handoff reveal"><strong>This is where Intendra stops.</strong> The initiative goes to the owner, in their tools.</p>
-      </div>
-    </section>
-
-    <!-- Reveal -->
-    <section id="reveal" class="section--canvas prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <span class="prod__badge">Only at Intendra</span>
-          <img class="prod__icon" src="assets/icons/Product_Reveal.png" alt="" width="64" height="64" />
-          <h2 class="prod__q">Who is leaving without telling us?</h2>
-          <span class="prod__name">Reveal™</span>
-          <p class="prod__answer">92% of unhappy customers never complain. Reveal finds them before they go.</p>
         </div>
-        <div class="prod__example reveal prod__example--number">
-          <span class="prod__example-big">92%</span>
-          <p>never complain. Voice of Customer hears the other 8%. Voice of Data reads them all.</p>
-        </div>
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Replaces</h3>
-              <p>Churn as a lagging indicator, and retention lists built only from complainers.</p>
-            </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Silent-signal detection across low-contact customers</li>
-                <li>Risk per account, ranked by probability and revenue</li>
-                <li>Cause linkage, learned from the customers who did speak up</li>
-                <li>Early enough to act</li>
-              </ul>
-            </div>
-          </div>
-        </details>
       </div>
     </section>
 
     <!-- Fit -->
-    <section id="fit" class="section--light prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <span class="prod__badge">Only at Intendra</span>
-          <img class="prod__icon" src="assets/icons/product-fit-512-transparent.png" alt="" width="64" height="64" />
-          <h2 class="prod__q">Who should handle what?</h2>
-          <span class="prod__name">FIT</span>
-          <p class="prod__answer">The best channel for each intent, and the best associate for each intent and customer type.</p>
+    <section id="fit" class="section--light prod-show">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__badge">Only at Intendra</span>
+          <span class="prod-show__eyebrow"><img src="assets/icons/product-fit-512-transparent.png" alt="" width="28" height="28" />FIT</span>
+          <h2 class="prod-show__q">Best fit — by intent, channel, associate, and customer.</h2>
+          <p class="prod-show__answer">Every contact matched on four dimensions at once — the intent, the channel that resolves it, the associate who handles it best, and the customer on the other end.</p>
+          <ul class="prod-show__does">
+            <li>Intent → channel — which channel resolves each intent best</li>
+            <li>Intent → associate — who performs strongest on which contact types</li>
+            <li>Customer → associate — <em>first-time, high-value, at-risk</em>, matched</li>
+            <li>Channel → customer — where each customer type is best served</li>
+            <li>Predicted vs. actual — you watch the prediction hold</li>
+          </ul>
         </div>
-        <div class="prod__example reveal">
-          <span class="prod__example-label">Example</span>
-          <p>WhatsApp resolved 82% first-contact against a lower rate on voice for the same intents. Fit surfaces which channel each intent belongs in.</p>
-        </div>
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Replaces</h3>
-              <p>Routing by availability. "Whoever's free gets the call."</p>
-            </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Channel to intent — which channel resolves each best</li>
-                <li>Intent to associate — who performs best on which contact types</li>
-                <li>Customer to associate — first-time, high-value, at-risk, matched</li>
-                <li>Predicted vs. actual — you watch the prediction hold</li>
-              </ul>
-            </div>
+        <div class="prod-show__visual reveal">
+          <div class="pv-match" aria-hidden="true">
+            <span class="pv-label">Matched on intent, channel, associate, customer</span>
+            <div class="pv-match__row"><span class="pv-match__a">Password reset</span><span class="pv-match__arr">→</span><span class="pv-match__b">Chat</span><span class="pv-match__pct">91%</span></div>
+            <div class="pv-match__row"><span class="pv-match__a">Order status</span><span class="pv-match__arr">→</span><span class="pv-match__b">WhatsApp</span><span class="pv-match__pct">82%</span></div>
+            <div class="pv-match__row"><span class="pv-match__a">Refund dispute</span><span class="pv-match__arr">→</span><span class="pv-match__b">Voice · senior</span><span class="pv-match__pct">84%</span></div>
+            <div class="pv-match__row"><span class="pv-match__a">At-risk customer</span><span class="pv-match__arr">→</span><span class="pv-match__b">Named specialist</span><span class="pv-match__pct">88%</span></div>
+            <div class="pv-match__foot">First-contact resolution, by best-fit match</div>
           </div>
-        </details>
+        </div>
       </div>
     </section>
 
     <!-- Profile -->
-    <section id="profile" class="section--canvas prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <img class="prod__icon" src="assets/icons/Product_Profile.png" alt="" width="64" height="64" />
-          <h2 class="prod__q">Who do we coach, and on what?</h2>
-          <span class="prod__name">Profile™</span>
-          <p class="prod__answer">Every associate placed on effectiveness and efficiency, from 100% of their work.</p>
+    <section id="profile" class="section--canvas prod-show prod-show--flip">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__eyebrow"><img src="assets/icons/Product_Profile.png" alt="" width="28" height="28" />Profile™</span>
+          <h2 class="prod-show__q">Every agent, fairly measured.</h2>
+          <p class="prod-show__answer">Every associate placed on effectiveness and efficiency, from 100% of their work — not three sampled calls.</p>
+          <ul class="prod-show__does">
+            <li>Effectiveness — <em>FCR</em>, quality, snowballs, customer effort</li>
+            <li>Efficiency — handle-time variance, transfers, long and short calls</li>
+            <li>Every associate placed on the quadrant — Stars, Sleepers, Anchors, Weak links</li>
+            <li>Coaching intelligence drawn from real interactions, not three sampled calls</li>
+            <li>Scores that hold up when a partner disputes them</li>
+          </ul>
         </div>
-
-        <div class="pquad reveal" aria-label="Performance quadrant: effectiveness against efficiency">
-          <span class="pquad__y">Effectiveness →</span>
-          <span class="pquad__x">Efficiency →</span>
-          <div class="pquad__grid">
-            <div class="pquad__cell pquad__cell--sleeper">
-              <span class="pquad__name">Sleepers</span>
-              <span class="pquad__note">Effective, not efficient</span>
-            </div>
-            <div class="pquad__cell pquad__cell--star">
-              <span class="pquad__name">Stars</span>
-              <span class="pquad__note">Effective and efficient</span>
-            </div>
-            <div class="pquad__cell pquad__cell--weak">
-              <span class="pquad__name">Weak links</span>
-              <span class="pquad__note">Neither</span>
-            </div>
-            <div class="pquad__cell pquad__cell--anchor">
-              <span class="pquad__name">Anchors</span>
-              <span class="pquad__note">Efficient, not effective</span>
+        <div class="prod-show__visual reveal">
+          <div class="pv-card">
+            <span class="pv-label">Effectiveness against efficiency</span>
+            <div class="pquad" aria-label="Performance quadrant: effectiveness against efficiency">
+            <span class="pquad__y">Effectiveness →</span>
+            <span class="pquad__x">Efficiency →</span>
+            <div class="pquad__grid">
+              <div class="pquad__cell pquad__cell--sleeper"><span class="pquad__name">Sleepers</span><span class="pquad__note">Effective, not efficient</span></div>
+              <div class="pquad__cell pquad__cell--star"><span class="pquad__name">Stars</span><span class="pquad__note">Effective and efficient</span></div>
+              <div class="pquad__cell pquad__cell--weak"><span class="pquad__name">Weak links</span><span class="pquad__note">Neither</span></div>
+              <div class="pquad__cell pquad__cell--anchor"><span class="pquad__name">Anchors</span><span class="pquad__note">Efficient, not effective</span></div>
+              </div>
             </div>
           </div>
         </div>
+      </div>
+    </section>
 
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Replaces</h3>
-              <p>Adherence scores, handle-time league tables, and QA on three sampled calls.</p>
-            </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Effectiveness — FCR, quality, snowballs, customer effort</li>
-                <li>Efficiency — handle-time variance, transfers, long/short calls</li>
-                <li>Coaching intelligence drawn from real interactions</li>
-                <li>Scores that hold up when a partner disputes them</li>
-              </ul>
+    <!-- Reveal -->
+    <section id="reveal" class="section--light prod-show">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__badge">Only at Intendra</span>
+          <span class="prod-show__eyebrow"><img src="assets/icons/Product_Reveal.png" alt="" width="28" height="28" />Reveal™</span>
+          <h2 class="prod-show__q">The customers leaving without a word.</h2>
+          <p class="prod-show__answer">92% of unhappy customers never complain. Reveal reads the silent signals and finds them while you can still act.</p>
+          <ul class="prod-show__does">
+            <li>Silent-signal detection across low-contact, quiet accounts</li>
+            <li>Risk per account, ranked by probability and revenue at stake</li>
+            <li>Cause linkage, learned from the customers who did speak up</li>
+            <li>The accounts to act on this week — not a churn report next quarter</li>
+            <li>Early enough that the save is still possible</li>
+          </ul>
+        </div>
+        <div class="prod-show__visual reveal">
+          <div class="pv-card">
+            <span class="pv-label">Who speaks up, and who doesn't</span>
+            <div class="pv-dots" aria-hidden="true">
+              <div class="pv-dots__grid" data-dot-matrix></div>
+              <div class="pv-dots__legend">
+                <span><i class="pv-dots__key pv-dots__key--vocal"></i>8% complain</span>
+                <span><i class="pv-dots__key pv-dots__key--silent"></i>92% stay silent</span>
+              </div>
             </div>
           </div>
-        </details>
+        </div>
       </div>
     </section>
 
     <!-- Ask Intendra -->
-    <section id="ask" class="section--light prod-block">
-      <div class="container prod">
-        <div class="prod__head reveal">
-          <span class="prod__badge">Your way in</span>
-          <span class="prod__icon prod__icon--ask" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11 7L4 20l1-4A8 8 0 1121 12z"/><path d="M9.5 10.5a2.5 2.5 0 013.9-2 2.2 2.2 0 01-.9 4c0 .8 0 1.2 0 1.2M12.5 16h.01"/></svg>
+    <section id="ask" class="section--canvas prod-show prod-show--flip">
+      <div class="container prod-show__grid">
+        <div class="prod-show__copy reveal">
+          <span class="prod-show__badge prod-show__badge--way">Your way in</span>
+          <span class="prod-show__eyebrow">
+            <span class="prod-show__eyebrow-ask" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a8 8 0 01-11 7L4 20l1-4A8 8 0 1121 12z"/><path d="M9.5 10.5a2.5 2.5 0 013.9-2 2.2 2.2 0 01-.9 4c0 .8 0 1.2 0 1.2M12.5 16h.01"/></svg></span>
+            Ask Intendra™
           </span>
-          <h2 class="prod__q">Can I just ask?</h2>
-          <span class="prod__name">Ask Intendra™</span>
-          <p class="prod__answer">Not another product — the way you use all of them. Ask any signal, step, or outcome in plain language and get the answer, the action, and the why.</p>
+          <h2 class="prod-show__q">Ask anything, in plain language.</h2>
+          <p class="prod-show__answer">Not another product — the way you use all of them. Ask any signal, step, or outcome in plain language and get the answer, the action, and the why.</p>
+          <ul class="prod-show__does">
+            <li>Ask in plain language, grounded in your own data</li>
+            <li>Every answer carries the action and the why — not just a number</li>
+            <li>Reasons over cost, cause, owner and action — not raw transcripts</li>
+            <li>The same model behind all five products</li>
+          </ul>
         </div>
-        <details class="prod__details reveal">
-          <summary class="prod__summary">What it does</summary>
-          <div class="prod__body">
-            <div class="prod__col">
-              <h3 class="prod__label">Why it's different</h3>
-              <p>Every platform has a chatbot. The difference is what it reasons over — cost, cause, owner, and action, not raw transcripts.</p>
+        <div class="prod-show__visual reveal">
+          <div class="pv-card">
+            <span class="pv-label">Ask anything</span>
+            <div class="pv-chat" aria-hidden="true">
+            <div class="pv-chat__q">Why did contacts rise last week?</div>
+            <div class="pv-chat__a">
+              <span class="pv-chat__ava">i</span>
+              <p>Up 3%. Most of it traces to one delayed-refund policy — about <strong>$553K a year</strong>. Owner: Billing. Prescribed: auto-refund inside 48 hours.</p>
             </div>
-            <div class="prod__col">
-              <h3 class="prod__label">Does</h3>
-              <ul class="prod__list">
-                <li>Ask in plain language, grounded in your data</li>
-                <li>Every answer carries the action and the why</li>
-                <li>The same model behind all five products</li>
-              </ul>
             </div>
           </div>
-        </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- Where Intendra stops -->
+    <section class="prod-stops">
+      <div class="container reveal">
+        <span class="prod-stops__eyebrow">Where Intendra stops</span>
+        <h2 class="prod-stops__title">Intendra takes you to the decision — priced, owned, ready.</h2>
+        <p class="prod-stops__text">Your team ships the fix in their own tools, then brings the result back to the review. We find it, cost it, and hand it over. We don't pretend to run your business for you.</p>
       </div>
     </section>
 
@@ -317,7 +317,6 @@
         <h4>Company</h4>
         <ul>
           <li><a href="about.html">About</a></li>
-          <li><a href="solutions.html#services">Services</a></li>
           <li><a href="#">Careers</a></li>
           <li><a href="contact.html">Contact</a></li>
         </ul>
@@ -349,6 +348,21 @@
     </div>
   </footer>
 
+  <script>
+    // Reveal: 100-dot silence matrix — 8 vocal, 92 silent, scattered.
+    (function () {
+      var grid = document.querySelector('[data-dot-matrix]');
+      if (!grid) return;
+      var vocal = { 4:1, 17:1, 23:1, 41:1, 56:1, 68:1, 79:1, 92:1 };
+      var frag = document.createDocumentFragment();
+      for (var i = 0; i < 100; i++) {
+        var d = document.createElement('span');
+        d.className = 'pv-dots__dot' + (vocal[i] ? ' is-vocal' : '');
+        frag.appendChild(d);
+      }
+      grid.appendChild(frag);
+    })();
+  </script>
   <script src="js/main.js?v=30"></script>
   <script src="js/animations.js?v=25"></script>
 </body>
