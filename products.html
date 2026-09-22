@@ -8,7 +8,7 @@
   <link rel="icon" href="assets/logos/favicon/favicon-32x32.png" />
   <link rel="stylesheet" href="css/variables.css?v=38" />
   <link rel="stylesheet" href="css/base.css?v=38" />
-  <link rel="stylesheet" href="css/layout.css?v=94" />
+  <link rel="stylesheet" href="css/layout.css?v=112" />
   <link rel="stylesheet" href="css/components.css?v=38" />
   <link rel="stylesheet" href="css/animations.css?v=38" />
 </head>
@@ -347,6 +347,28 @@
         frag.appendChild(d);
       }
       grid.appendChild(frag);
+
+      // Every so often, one silent customer quietly leaves — and doesn't come back.
+      // Only runs while the matrix is on screen, and never empties it.
+      if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+      var LOST_CAP = 12, lost = 0, timer = null;
+      function loseOne() {
+        var pool = grid.querySelectorAll('.pv-dots__dot:not(.is-vocal):not(.is-lost)');
+        if (!pool.length || lost >= LOST_CAP) { stop(); return; }
+        pool[Math.floor(Math.random() * pool.length)].classList.add('is-lost');
+        lost++;
+        schedule();
+      }
+      function schedule() {
+        clearTimeout(timer);
+        timer = setTimeout(loseOne, 8000 + Math.random() * 5000); // 8–13s apart
+      }
+      function stop() { clearTimeout(timer); timer = null; }
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) { e.isIntersecting ? schedule() : stop(); });
+        }, { threshold: 0.25 }).observe(grid);
+      } else { schedule(); }
     })();
   </script>
   <script src="js/main.js?v=30"></script>

@@ -6297,3 +6297,31 @@ body.resources main > section:not(.res-hero) { padding-block: var(--space-16); }
 @media (prefers-reduced-motion: reduce) {
   .spine:hover .spine__cover { transform: none; }
 }
+
+/* A silent customer leaves — Reveal's matrix loses one, quietly, and it stays gone */
+.pv-dots__dot.is-lost {
+  opacity: 0.1;
+  transform: scale(0.55);
+  transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out);
+}
+.pv-dots__dot { transition: opacity 1.6s var(--ease-out), transform 1.6s var(--ease-out); }
+
+/* "Every silence." arrives more quietly than the two lines above it.
+   `both` holds the from-state during the delay; if the animation never
+   runs (no JS), the text simply stays visible rather than disappearing. */
+.hero h1.is-visible .text-gradient {
+  animation: silence-in 2.4s cubic-bezier(0.16, 0.8, 0.24, 1) 0.5s both;
+}
+@keyframes silence-in {
+  from { opacity: 0; filter: blur(5px); }
+  to   { opacity: 1; filter: blur(0); }
+}
+
+/* Brand text selection */
+::selection      { background: rgba(27, 234, 135, 0.3); color: var(--color-obsidian); }
+::-moz-selection { background: rgba(27, 234, 135, 0.3); color: var(--color-obsidian); }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero h1.is-visible .text-gradient { animation: none; }
+  .pv-dots__dot, .pv-dots__dot.is-lost { transition: none; }
+}
