@@ -6325,3 +6325,20 @@ body.resources main > section:not(.res-hero) { padding-block: var(--space-16); }
   .hero h1.is-visible .text-gradient { animation: none; }
   .pv-dots__dot, .pv-dots__dot.is-lost { transition: none; }
 }
+
+/* Intendra symbol — small mark above each closing CTA */
+.cta-mark {
+  display: block;
+  width: auto;
+  height: 34px;
+  margin: 0 auto var(--space-6);
+  opacity: 0.82;
+}
+
+/* Intendra symbol at the heart of the engine diagram (replaces the typed "i") */
+.engine__core-mark {
+  display: block;
+  width: auto;
+  height: 36px;
+  filter: drop-shadow(0 1px 1px rgba(255, 255, 255, 0.5));
+}
