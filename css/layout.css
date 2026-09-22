@@ -6290,14 +6290,10 @@ body.resources main > section:not(.res-hero) { padding-block: var(--space-16); }
   transition: transform var(--duration-slow) var(--ease-standard),
               box-shadow var(--duration-slow) var(--ease-standard);
 }
-/* a touch of shelf irregularity — these are objects, not tiles */
-.shelf .spine:nth-child(odd)  .spine__cover { transform: rotate(-1.2deg); }
-.shelf .spine:nth-child(even) .spine__cover { transform: rotate(1deg); }
 .spine:hover .spine__cover {
-  transform: rotate(0deg) translateY(-6px);
+  transform: translateY(-6px);
   box-shadow: 0 20px 38px -12px rgba(40, 40, 45, 0.48), 0 1px 3px rgba(40, 40, 45, 0.2);
 }
 @media (prefers-reduced-motion: reduce) {
-  .shelf .spine .spine__cover { transform: none; }
   .spine:hover .spine__cover { transform: none; }
 }
