@@ -6,13 +6,13 @@
   <title>Resources — Intendra AI</title>
   <meta name="description" content="Articles, research, podcasts, and video on customer experience intelligence — from practitioners who've been at the frontline for decades." />
   <link rel="icon" href="assets/logos/favicon/favicon-32x32.png" />
-  <link rel="stylesheet" href="css/variables.css?v=37" />
-  <link rel="stylesheet" href="css/base.css?v=37" />
-  <link rel="stylesheet" href="css/layout.css?v=59" />
-  <link rel="stylesheet" href="css/components.css?v=37" />
-  <link rel="stylesheet" href="css/animations.css?v=37" />
+  <link rel="stylesheet" href="css/variables.css?v=38" />
+  <link rel="stylesheet" href="css/base.css?v=38" />
+  <link rel="stylesheet" href="css/layout.css?v=107" />
+  <link rel="stylesheet" href="css/components.css?v=38" />
+  <link rel="stylesheet" href="css/animations.css?v=38" />
 </head>
-<body>
+<body class="resources">
 
   <header class="site-header">
     <div class="container">
@@ -43,41 +43,75 @@
   <main>
 
     <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <p class="eyebrow reveal">Resources</p>
-        <h1 class="reveal">Thinking that moves<br>CX forward.</h1>
-        <p class="reveal">Research, perspective, and provocation on customer experience intelligence — written and recorded by practitioners who've been at the frontline for decades.</p>
-        <div class="hero-actions reveal">
-          <a href="#articles" class="btn btn--outline">Articles</a>
-          <a href="#podcasts" class="btn btn--outline">Podcasts</a>
+    <section class="res-hero">
+      <span class="res-hero__wash" aria-hidden="true"></span>
+      <span class="res-hero__rules" aria-hidden="true"></span>
+      <div class="container res-hero__grid">
+        <div class="res-hero__copy reveal">
+          <p class="eyebrow">Resources</p>
+          <h1 class="res-hero__title">Thinking that moves <span class="text-gradient">CX forward.</span></h1>
+          <p class="res-hero__sub">Research, perspective, and provocation on customer experience intelligence — written and recorded by practitioners who have been at the frontline for decades.</p>
         </div>
+
+        <nav class="res-index reveal" aria-label="Browse resources">
+          <a class="res-index__row" href="#articles">
+            <span class="res-index__n">01</span>
+            <span class="res-index__body">
+              <span class="res-index__t">Articles</span>
+              <span class="res-index__d">Written perspective</span>
+            </span>
+            <span class="res-index__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="res-index__row" href="#podcasts">
+            <span class="res-index__n">02</span>
+            <span class="res-index__body">
+              <span class="res-index__t">Podcasts &amp; video</span>
+              <span class="res-index__d">Conversations worth your time</span>
+            </span>
+            <span class="res-index__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+          <a class="res-index__row" href="#case-studies">
+            <span class="res-index__n">03</span>
+            <span class="res-index__body">
+              <span class="res-index__t">Case studies</span>
+              <span class="res-index__d">Proof, in production</span>
+            </span>
+            <span class="res-index__arrow" aria-hidden="true">&rarr;</span>
+          </a>
+        </nav>
       </div>
     </section>
 
     <!-- Articles -->
-    <section id="articles" class="section--light">
+    <section id="articles" class="section--canvas">
       <div class="container">
-        <p class="eyebrow reveal" style="justify-content:flex-start;">Articles</p>
-        <h2 class="reveal" style="font-size: var(--text-h1);">Written perspective</h2>
-
-        <div class="feature-grid reveal-stagger">
-          <article class="card reveal" style="background: var(--surface-card-light); color: var(--text-on-light);">
-            <span class="badge">CX Strategy</span>
-            <p style="font-size: var(--text-caption); color: var(--text-on-light-muted); margin-top: var(--space-3); text-transform: uppercase; letter-spacing: var(--tracking-wide);">CustomerThink</p>
-            <h3 style="font-size: var(--text-h3); margin-top: var(--space-2);">Beware of Silent Sufferers! First Contact and Digital Containment Rates are Worse than You Think</h3>
-            <p style="color: var(--text-on-light-muted); margin-top: var(--space-3);">Headline metrics like First Contact Resolution and Digital Containment consistently overstate performance. Bill examines how silent sufferers — customers who give up rather than complain — are invisibly distorting your CX data and what to do about it.</p>
-            <p style="font-size: var(--text-body-s); color: var(--text-on-light-muted); margin-top: var(--space-4);">Bill Price · 14 Nov 2025</p>
-            <a href="#" class="btn btn--outline" style="margin-top: var(--space-4); border-color: var(--border-light); color: var(--text-on-light);">Read article →</a>
-          </article>
+        <div class="ab-head reveal">
+          <p class="eyebrow">Articles</p>
+          <h2>Written perspective.</h2>
         </div>
 
-        <div class="card--dark reveal" style="margin-top: var(--space-10); text-align:center;">
-          <h3 style="font-size: var(--text-h2);">More articles coming</h3>
-          <p style="margin-top: var(--space-2);">New pieces published regularly. Subscribe to stay updated.</p>
-          <form style="display:flex; gap: var(--space-3); max-width: 420px; margin: var(--space-6) auto 0; flex-wrap: wrap; justify-content:center;">
+        <article class="res-post reveal">
+          <div class="res-post__side">
+            <span class="res-post__badge">CX Strategy</span>
+            <span class="res-post__source">CustomerThink</span>
+            <span class="res-post__meta">Bill Price</span>
+            <span class="res-post__meta">14 Nov 2025</span>
+          </div>
+          <div class="res-post__main">
+            <h3>Beware of Silent Sufferers! First Contact and Digital Containment Rates are Worse than You Think</h3>
+            <p>Headline metrics like First Contact Resolution and Digital Containment consistently overstate performance. Bill examines how silent sufferers — customers who give up rather than complain — are invisibly distorting your CX data, and what to do about it.</p>
+            <a href="#" class="res-post__link">Read article <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+
+        <div class="res-sub reveal">
+          <div class="res-sub__copy">
+            <h3>More articles coming</h3>
+            <p>New pieces published regularly. Get them delivered as they go live.</p>
+          </div>
+          <form class="res-sub__form">
             <label class="visually-hidden" for="article-email">Email</label>
-            <input type="email" id="article-email" placeholder="Get new articles delivered to your inbox" style="flex: 1; min-width: 220px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-pill); border: 1px solid var(--border-default); background: var(--surface-sunken); color: var(--text-primary);" />
+            <input type="email" id="article-email" placeholder="you@company.com" />
             <button type="submit" class="btn btn--primary">Subscribe</button>
           </form>
         </div>
@@ -85,28 +119,38 @@
     </section>
 
     <!-- Podcasts -->
-    <section id="podcasts" class="section--canvas">
+    <section id="podcasts" class="section--light">
       <div class="container">
-        <p class="eyebrow reveal" style="justify-content:flex-start;">Podcasts &amp; Video</p>
-        <h2 class="reveal" style="font-size: var(--text-h1);">Conversations worth your time</h2>
-
-        <div class="feature-grid reveal-stagger">
-          <article class="card reveal">
-            <span class="badge">YouTube Live</span>
-            <p style="font-size: var(--text-caption); color: var(--text-secondary); margin-top: var(--space-3); text-transform: uppercase; letter-spacing: var(--tracking-wide);">AI &amp; CX · EP 01</p>
-            <h3 style="font-size: var(--text-h3); margin-top: var(--space-2);">The ROI of AI in CX — Is there any?</h3>
-            <p style="color: var(--text-secondary); margin-top: var(--space-3);">An honest, unfiltered examination of whether AI investments in customer experience are generating real business returns — or producing impressive demos with little measurable impact.</p>
-            <p style="font-size: var(--text-body-s); color: var(--text-secondary); margin-top: var(--space-4);">Bill Price · 14 Nov 2025</p>
-            <a href="#" class="btn btn--outline" style="margin-top: var(--space-4);">Watch now →</a>
-          </article>
+        <div class="ab-head reveal">
+          <p class="eyebrow">Podcasts &amp; video</p>
+          <h2>Conversations worth your time.</h2>
         </div>
 
-        <div class="card--dark reveal" style="margin-top: var(--space-10); text-align:center;">
-          <h3 style="font-size: var(--text-h2);">More episodes coming</h3>
-          <p style="margin-top: var(--space-2);">New sessions published regularly.</p>
-          <form style="display:flex; gap: var(--space-3); max-width: 420px; margin: var(--space-6) auto 0; flex-wrap: wrap; justify-content:center;">
+        <article class="res-post res-post--media reveal">
+          <div class="res-post__side">
+            <span class="res-post__play" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5.5v13l11-6.5z"/></svg>
+            </span>
+            <span class="res-post__badge">YouTube Live</span>
+            <span class="res-post__source">AI &amp; CX &middot; EP 01</span>
+            <span class="res-post__meta">Bill Price</span>
+            <span class="res-post__meta">14 Nov 2025</span>
+          </div>
+          <div class="res-post__main">
+            <h3>The ROI of AI in CX — is there any?</h3>
+            <p>An honest, unfiltered examination of whether AI investments in customer experience are generating real business returns — or producing impressive demos with little measurable impact.</p>
+            <a href="#" class="res-post__link">Watch now <span aria-hidden="true">&rarr;</span></a>
+          </div>
+        </article>
+
+        <div class="res-sub reveal">
+          <div class="res-sub__copy">
+            <h3>More episodes coming</h3>
+            <p>New sessions published regularly. We&rsquo;ll tell you when one goes live.</p>
+          </div>
+          <form class="res-sub__form">
             <label class="visually-hidden" for="podcast-email">Email</label>
-            <input type="email" id="podcast-email" placeholder="Get notified when new episodes go live" style="flex: 1; min-width: 220px; padding: var(--space-3) var(--space-4); border-radius: var(--radius-pill); border: 1px solid var(--border-default); background: var(--surface-sunken); color: var(--text-primary);" />
+            <input type="email" id="podcast-email" placeholder="you@company.com" />
             <button type="submit" class="btn btn--primary">Subscribe</button>
           </form>
         </div>
@@ -114,45 +158,59 @@
     </section>
 
     <!-- Case studies -->
-    <section id="case-studies" class="section--light">
+    <section id="case-studies" class="section--canvas">
       <div class="container">
-        <p class="eyebrow reveal" style="justify-content:flex-start;">Case Studies</p>
-        <h2 class="reveal" style="font-size: var(--text-h1);">Proof, in production</h2>
+        <div class="ab-head reveal">
+          <p class="eyebrow">Case studies</p>
+          <h2>Proof, in production.</h2>
+        </div>
 
-        <div class="feature-grid reveal-stagger">
-          <article class="card case-study reveal">
-            <span class="badge">Retail · Contact Centre</span>
-            <h3 style="font-size: var(--text-h3); margin-top: var(--space-3);">Eliminating a $553K billing-dispute leak</h3>
-            <p style="margin-top: var(--space-3);">Compass™ traced 61% of billing contacts to a single delayed-refund policy — and prescribed the fix that removed them.</p>
-            <div class="case-study__metric">
-              <span class="case-study__value">−23%</span>
-              <span class="case-study__label">contacts per order</span>
+        <div class="cases reveal-stagger">
+          <article class="case reveal">
+            <span class="case__tag">Retail &middot; Contact centre</span>
+            <h3>Eliminating a $553K billing-dispute leak</h3>
+            <p>Compass&trade; traced 61% of billing contacts to a single delayed-refund policy — and prescribed the fix that removed them.</p>
+            <div class="case__metric">
+              <strong>&minus;23%</strong>
+              <span>Contacts per order</span>
             </div>
-            <a href="#" class="product-door__link" style="margin-top: var(--space-4); display:inline-block; color: var(--accent);">Read case study →</a>
+            <a href="#" class="res-post__link">Read case study <span aria-hidden="true">&rarr;</span></a>
           </article>
-          <article class="card case-study reveal">
-            <span class="badge">SaaS · Subscriptions</span>
-            <h3 style="font-size: var(--text-h3); margin-top: var(--space-3);">Catching churn 5 weeks before it showed</h3>
-            <p style="margin-top: var(--space-3);">Reveal™ surfaced silently disengaging accounts with no ticket or complaint — while there was still time to intervene.</p>
-            <div class="case-study__metric">
-              <span class="case-study__value">5 wks</span>
-              <span class="case-study__label">earlier churn detection</span>
+
+          <article class="case reveal">
+            <span class="case__tag">SaaS &middot; Subscriptions</span>
+            <h3>Catching churn five weeks before it showed</h3>
+            <p>Reveal&trade; surfaced silently disengaging accounts with no ticket and no complaint — while there was still time to intervene.</p>
+            <div class="case__metric">
+              <strong>5 wks</strong>
+              <span>Earlier churn detection</span>
             </div>
-            <a href="#" class="product-door__link" style="margin-top: var(--space-4); display:inline-block; color: var(--accent);">Read case study →</a>
+            <a href="#" class="res-post__link">Read case study <span aria-hidden="true">&rarr;</span></a>
           </article>
-          <article class="card case-study reveal">
-            <span class="badge">Telecom · Multilingual</span>
-            <h3 style="font-size: var(--text-h3); margin-top: var(--space-3);">A costed action list the CFO signed off on</h3>
-            <p style="margin-top: var(--space-3);">Handling and downstream cost, with the attribution methodology shown — CX finally spoke the language of the budget meeting.</p>
-            <div class="case-study__metric">
-              <span class="case-study__value">$2.4M</span>
-              <span class="case-study__label">demand eliminated, annualized</span>
+
+          <article class="case reveal">
+            <span class="case__tag">Telecom &middot; Multilingual</span>
+            <h3>A costed action list the CFO signed off on</h3>
+            <p>Handling and downstream cost, with the attribution methodology shown — CX finally spoke the language of the budget meeting.</p>
+            <div class="case__metric">
+              <strong>$2.4M</strong>
+              <span>Demand eliminated, annualised</span>
             </div>
-            <a href="#" class="product-door__link" style="margin-top: var(--space-4); display:inline-block; color: var(--accent);">Read case study →</a>
+            <a href="#" class="res-post__link">Read case study <span aria-hidden="true">&rarr;</span></a>
           </article>
         </div>
 
-        <p class="proof-disclaimer" style="color: var(--text-muted);">Illustrative examples. Actual results vary by client and will be replaced with verified customer data.</p>
+        <p class="reach__note reveal">Illustrative examples. Actual results vary by client and will be replaced with verified customer data.</p>
+      </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta">
+      <div class="container reveal" style="text-align:center;">
+        <h2>See it on your own data.</h2>
+        <p style="max-width: 520px; margin: var(--space-3) auto 0;">Reading about it is one thing. Watching it run on your own customers is another.</p>
+        <a href="contact.html" class="btn btn--primary final-cta__btn">Book a Demo &rarr;</a>
+        <p style="font-size: var(--text-caption); color: var(--text-muted); margin-top: var(--space-4);">No commitment. Personalised walkthrough within 48 hours.</p>
       </div>
     </section>
 
@@ -209,7 +267,7 @@
     </div>
   </footer>
 
-  <script src="js/main.js"></script>
-  <script src="js/animations.js"></script>
+  <script src="js/main.js?v=30"></script>
+  <script src="js/animations.js?v=25"></script>
 </body>
 </html>
