@@ -6275,3 +6275,28 @@ body.resources main > section:not(.res-hero) { padding-block: var(--space-16); }
   .res-hero__title { max-width: none; }
   .res-hero__rules { display: none; }
 }
+
+/* Books — real cover art (extracted from the deck) */
+.spine__cover {
+  display: block;
+  width: 100%;
+  max-width: 132px;
+  height: auto;
+  margin-bottom: var(--space-4);
+  border-radius: 2px;
+  background: var(--surface-card);
+  box-shadow: 0 12px 26px -10px rgba(40, 40, 45, 0.42), 0 1px 3px rgba(40, 40, 45, 0.18);
+  transition: transform var(--duration-slow) var(--ease-standard),
+              box-shadow var(--duration-slow) var(--ease-standard);
+}
+/* a touch of shelf irregularity — these are objects, not tiles */
+.shelf .spine:nth-child(odd)  .spine__cover { transform: rotate(-1.2deg); }
+.shelf .spine:nth-child(even) .spine__cover { transform: rotate(1deg); }
+.spine:hover .spine__cover {
+  transform: rotate(0deg) translateY(-6px);
+  box-shadow: 0 20px 38px -12px rgba(40, 40, 45, 0.48), 0 1px 3px rgba(40, 40, 45, 0.2);
+}
+@media (prefers-reduced-motion: reduce) {
+  .shelf .spine .spine__cover { transform: none; }
+  .spine:hover .spine__cover { transform: none; }
+}
